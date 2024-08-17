@@ -1,5 +1,5 @@
 package model;
 
-public enum Especies {
+public enum Especie {
     GATO, CACHORRO;
 }
