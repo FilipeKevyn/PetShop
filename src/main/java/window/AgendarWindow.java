@@ -1,8 +1,8 @@
-package window;
+/*package window;
 
-import model.Cachorro;
-import model.Gato;
+import model.Especie;
 import model.Pet;
+import window.JanelaGenerica;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,9 +43,9 @@ public class AgendarWindow extends JanelaGenerica {
                 if (!nome.isEmpty() && tipo != null) {
                     Pet pet;
                     if (tipo.equals("Gato")) {
-                        pet = new Gato(nome);
+                        pet = new Pet(nome, Especie.GATO);
                     } else if (tipo.equals("Cachorro")) {
-                        pet = new Cachorro(nome);
+                        pet = new Pet(nome, Especie.CACHORRO);
                     } else {
                         return;
                     }
@@ -81,4 +81,4 @@ public class AgendarWindow extends JanelaGenerica {
             }
         }
     }
-
+*/

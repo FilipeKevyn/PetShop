@@ -6,6 +6,25 @@ import java.util.UUID;
 
 public class Dono {
     private String nome;
-    private UUID id;
-    private ArrayList<Pet> pets;
+
+    // private ArrayList<Pet> pets;
+        // Dono não precisa de uma Lista de Pet
+        // o pet do dono irá ser veinculado ao id do agendamento
+
+    public Dono(String nome){
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }
