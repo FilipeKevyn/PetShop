@@ -1,4 +1,4 @@
-/*package window;
+package window;
 
 import model.Especie;
 import model.Pet;
@@ -42,13 +42,7 @@ public class AgendarWindow extends JanelaGenerica {
                 String tipo = (String) tipoComboBox.getSelectedItem();
                 if (!nome.isEmpty() && tipo != null) {
                     Pet pet;
-                    if (tipo.equals("Gato")) {
-                        pet = new Pet(nome, Especie.GATO);
-                    } else if (tipo.equals("Cachorro")) {
-                        pet = new Pet(nome, Especie.CACHORRO);
-                    } else {
-                        return;
-                    }
+                    pet = new Pet(nome, tipo);
                     pets.add(pet);
                     nomeField.setText("");
                     atualizarLista();
@@ -81,4 +75,4 @@ public class AgendarWindow extends JanelaGenerica {
             }
         }
     }
-*/
+

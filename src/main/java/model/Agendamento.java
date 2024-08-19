@@ -1,36 +1,23 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Agendamento {
+public class Agendamento implements Serializable {
     private UUID id;
-
-    private List<Object> agenda = new ArrayList<>();
-
-    public List<Object> getAgenda_mtz() {
-        return agenda_mtz;
-    }
-
-    private List<Object> agenda_mtz = new ArrayList<>();
-
     private String nome_pet;
     private String dono;
-    int valor;
-    public Agendamento(){
 
-    }
-    public List<Object> getAgenda() {
-        return agenda;
+    private List<Procedimento> procedimentos = new ArrayList<>();
+
+    public Agendamento(Dono dono, Pet pet, List<Procedimento> procedimentos){
+        id = UUID.randomUUID();
     }
 
-    public void addAgenda(Pet pet, Dono dono, int valor){
-        agenda.add(pet.getNome());
-        agenda.add(dono.getNome());
-        agenda.add(pet.getEspecie());
-        agenda.add(valor);
-        agenda_mtz.add(agenda);
+    public List<Procedimento> getProcedimentos() {
+        return procedimentos;
     }
 
     @Override
@@ -39,7 +26,7 @@ public class Agendamento {
                 "id=" + id +
                 ", nome_pet='" + nome_pet + '\'' +
                 ", dono='" + dono + '\'' +
-                ", valor=" + valor +
+                ", valor=" +
                 '}';
     }
 }

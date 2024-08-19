@@ -10,7 +10,8 @@ public class Procedimento {
             new Procedimento("Cortar as unhas", 20, 30),
             new Procedimento("Tosa",30, 20),
             new Procedimento("Banho", 80, 50)
-    };
+    }; // retirar
+
     public Procedimento(String nome, int tempo, double preco){
         this.nome = nome;
         this.tempo = tempo;

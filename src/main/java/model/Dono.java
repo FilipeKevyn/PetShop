@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Dono {
+    // Criar uma nova forma de guardar informações do usuario
     private String nome;
 
     // private ArrayList<Pet> pets;
