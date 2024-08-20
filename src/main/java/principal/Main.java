@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Controlador control = new Controlador();
         //AgendarWindow petWindow = new AgendarWindow();
-        control.addDono("Dudu"); // -> Lista de donos
+        control.addDono("Dudu","12345678"); // -> Lista de donos
         // addPet
         control.addPet("toto", "Cachorro"); // -> Lista de Pet
         // addProcedimento
@@ -21,6 +21,6 @@ public class Main {
         // addProcedimento para o Pet
 
         // add agendamento
-        control.addAgendamento();
+        //control.addAgendamento();
     }
 }

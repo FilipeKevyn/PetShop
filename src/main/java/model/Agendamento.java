@@ -7,13 +7,16 @@ import java.util.UUID;
 
 public class Agendamento implements Serializable {
     private UUID id;
-    private String nome_pet;
-    private String dono;
+    private Pet nome_pet;
+    private Dono dono;
 
-    private List<Procedimento> procedimentos = new ArrayList<>();
+    private List<Procedimento> procedimentos;
 
     public Agendamento(Dono dono, Pet pet, List<Procedimento> procedimentos){
         id = UUID.randomUUID();
+        this.dono = dono;
+        this.nome_pet = pet;
+        this.procedimentos = procedimentos;
     }
 
     public List<Procedimento> getProcedimentos() {

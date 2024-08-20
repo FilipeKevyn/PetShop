@@ -8,8 +8,8 @@ public class Controlador {
     private Loja loja = new Loja();
 
     // A
-    public Dono addDono(String nome) {
-        Dono dono = new Dono(nome);
+    public Dono addDono(String nome, String cpf) {
+        Dono dono = new Dono(nome,cpf);
         loja.getProprietarios().add(dono);
 
         return dono;

@@ -3,6 +3,7 @@ package model;
 public class Pet {
     private String nome;
     private Especie especies;
+    private Dono dono;
 
     public Pet(String nome, String especie){
         this.nome = nome;

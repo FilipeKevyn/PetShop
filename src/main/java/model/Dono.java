@@ -5,23 +5,31 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Dono {
-    // Criar uma nova forma de guardar informações do usuario
+
+    /* Dono irá ser necessário para guardar as informações como o
+    cpf, que será utilizado para hora do agendamento
+    */
+
     private String nome;
+    private String cpf;
 
-    // private ArrayList<Pet> pets;
-        // Dono não precisa de uma Lista de Pet
-        // o pet do dono irá ser veinculado ao id do agendamento
-
-    public Dono(String nome){
+    private ArrayList<Pet> pets; // Dono agora terá a lista com seus pets
+    public Dono(){}
+    public Dono(String nome, String cpf){
         this.nome = nome;
+        this.cpf = cpf;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getCpf() {
+        return cpf;
+    }
+
+    public ArrayList<Pet> getPets() {
+        return pets;
     }
 
     @Override
