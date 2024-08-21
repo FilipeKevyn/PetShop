@@ -77,7 +77,7 @@ public class TelaInicial extends JFrame {
     }
 
     private void openAgendar() {
-        AgendarWindowDois telaAgendar = new AgendarWindowDois();
+        AgendarWindow telaAgendar = new AgendarWindow();
         telaAgendar.mostrar();
         //telaAgendar.setVisible(true);
     }
