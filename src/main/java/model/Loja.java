@@ -7,7 +7,7 @@ import java.util.List;
 public class Loja implements Serializable {
     private List<Agendamento> agendamentos;
     private List<Dono> proprietarios;
-    private List<Pet> pets;
+    private List<String> pets;
     private List<Procedimento> procedimentos;
 
     public Loja() {
@@ -25,11 +25,22 @@ public class Loja implements Serializable {
         return proprietarios;
     }
 
-    public List<Pet> getPets() {
+    public List<String> getPets() {
         return pets;
     }
 
     public List<Procedimento> getProcedimentos() {
         return procedimentos;
+    }
+    public Dono verificarCpf(String cpf){
+        for(Dono dono : getProprietarios()){
+            if (cpf == null){
+                return null;
+            }
+            if (dono.getCpf().equals(cpf)){
+                return dono;
+            }
+        }
+        return null;
     }
 }
