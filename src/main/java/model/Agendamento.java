@@ -6,22 +6,18 @@ import java.util.List;
 import java.util.UUID;
 
 public class Agendamento implements Serializable {
-    private UUID id;
-
-    private String nome_pet;
-
+    private Pet pet;
     private Dono dono;
     private List<Procedimento> procedimentos;
 
-    public Agendamento(Dono dono, String pet, List<Procedimento> procedimentos){
-        id = UUID.randomUUID();
+    public Agendamento(Dono dono, Pet pet, List<Procedimento> procedimentos){
         this.dono = dono;
-        this.nome_pet = pet;
+        this.pet = pet;
         this.procedimentos = procedimentos;
     }
 
-    public String getNome_pet() {
-        return nome_pet;
+    public Pet getPet() {
+        return pet;
     }
 
     public Dono getDono() {
@@ -34,11 +30,6 @@ public class Agendamento implements Serializable {
 
     @Override
     public String toString() {
-        return "Agendamento{" +
-                "id=" + id +
-                ", nome_pet='" + nome_pet + '\'' +
-                ", dono='" + dono + '\'' +
-                ", valor=" +
-                '}';
+        return String.format("[dono = %s; nome do pet = %s; especie = %s; procedimentos = null;]",dono.getNome(),pet.getNome(),pet.getEspecie());
     }
 }

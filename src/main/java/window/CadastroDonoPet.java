@@ -92,8 +92,9 @@ public class CadastroDonoPet {
         // Botão Adicionar
         adicionarButton = new JButton("Adicionar");
         adicionarButton.addActionListener(e -> {
-            String nomePet = nomePetField.getText();
-            cadastroController.addPet(nomePet);
+            String nome_pet = nomePetField.getText();
+            String especie = especiePetComboBox.getSelectedItem().toString();
+            cadastroController.addPet(nome_pet,especie);
             System.out.println(cadastroController.getDono().getPets());
             nomePetField.setText("");
         });

@@ -1,5 +1,7 @@
 package window;
 
+import model.Pet;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -21,7 +23,7 @@ public class TableTestWindow extends JFrame {
     }
 
     // Método para adicionar uma linha à tabela
-    public void adicionarLinha(String nome, String cpf, String pet) {
+    public void adicionarLinha(String nome, String cpf, Pet pet) {
         tableModel.addRow(new Object[]{nome, cpf, pet});
     }
 }

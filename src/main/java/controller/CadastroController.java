@@ -2,6 +2,7 @@ package controller;
 
 import model.Dono;
 import model.Loja;
+import model.Pet;
 import window.TableTestWindow;
 
 import java.util.List;
@@ -18,15 +19,16 @@ public class CadastroController {
     public Dono addCadastro(String nome, String cpf) {
         dono.setNome(nome);
         dono.setCpf(cpf);
-        loja.getProprietarios().add(dono);
+        loja.getCadastrados().add(dono);
         adicionaNatabela();
 
         dono = new Dono();
         return dono;
     }
 
-    public List<String> addPet(String nomePet) {
-        dono.getPets().add(nomePet);
+    public List<Pet> addPet(String nome_pet, String especies) {
+        Pet pet = new Pet(nome_pet, especies);
+        dono.getPets().add(pet);
 
         return dono.getPets();
     }

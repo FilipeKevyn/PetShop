@@ -6,14 +6,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class Dono {
-    /* Dono irá ser necessário para guardar as informações como o
-    cpf, que será utilizado para hora do agendamento
-    */
-
     private String nome;
 
     private String cpf;
-    private List<String> pets; // Dono agora terá a lista com seus pets
+    private List<Pet> pets;
 
     public Dono(){
         this.pets = new ArrayList<>();
@@ -39,7 +35,7 @@ public class Dono {
         this.cpf = cpf;
     }
 
-    public List<String> getPets() {
+    public List<Pet> getPets() {
         return pets;
     }
 

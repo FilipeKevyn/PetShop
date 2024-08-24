@@ -1,10 +1,13 @@
 package window;
 
+import controller.AgendaController;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class AgendarWindow {
     private JFrame frame;
+    private AgendaController agendaController;
     public AgendarWindow() {
         // Criação do frame
         frame = new JFrame("Informacoes do Pet");
