@@ -4,6 +4,7 @@ import model.Dono;
 import model.Loja;
 import window.TableTestWindow;
 
+import java.util.List;
 
 public class CadastroController {
     private Loja loja = new Loja();
@@ -15,18 +16,28 @@ public class CadastroController {
     }
 
     public Dono addCadastro(String nome, String cpf) {
-        dono = new Dono(nome, cpf); // Cria um novo dono com os dados fornecidos
+        dono.setNome(nome);
+        dono.setCpf(cpf);
         loja.getProprietarios().add(dono);
+        adicionaNatabela();
 
+        dono = new Dono();
         return dono;
     }
 
-    public String addPet(String nomePet) {
+    public List<String> addPet(String nomePet) {
         dono.getPets().add(nomePet);
 
-        // Atualiza a tabela com o novo dono e pet
-        tableTestWindow.adicionarLinha(dono.getNome(), dono.getCpf(), nomePet);
+        return dono.getPets();
+    }
 
-        return nomePet;
+    public void adicionaNatabela() {
+        if (!dono.getPets().isEmpty()) {
+            tableTestWindow.adicionarLinha(dono.getNome(), dono.getCpf(), dono.getPets().get(0));
+        }
+    }
+
+    public Dono getDono() {
+        return dono;
     }
 }

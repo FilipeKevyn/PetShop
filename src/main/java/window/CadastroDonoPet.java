@@ -5,8 +5,10 @@ import controller.CadastroController;
 import javax.swing.*;
 import java.awt.*;
 
-public class CadastroDonoPet extends JFrame {
+public class CadastroDonoPet {
+
     private JTextField nomeDonoField;
+    private JFrame CadUs;
     private JTextField cpfField;
     private JTextField nomePetField;
     private JComboBox<String> especiePetComboBox;
@@ -18,101 +20,125 @@ public class CadastroDonoPet extends JFrame {
     private CadastroController cadastroController;
 
     public CadastroDonoPet() {
-        setTitle("Cadastro Dono");
-        setSize(400, 250);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        CadUs = new JFrame("Cadastro Dono");
+
+        CadUs.setSize(400, 300);
+        CadUs.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        CadUs.setLocationRelativeTo(null);
 
         tableTestWindow = new TableTestWindow();
         cadastroController = new CadastroController(tableTestWindow);
 
         // Configurando layout
-        setLayout(new GridBagLayout());
+        CadUs.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-
-        jButton1 = new JButton("Tabela");
-        jButton1.addActionListener(evt -> openTable());
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        add(jButton1, gbc);
+        gbc.insets = new Insets(5, 10, 5, 10);  // Espaçamento entre os componentes
 
         // Nome do Dono
-        JLabel nomeDonoLabel = new JLabel("Nome do Dono");
+        JLabel nomeDonoLabel = new JLabel("Nome do Dono:");
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        add(nomeDonoLabel, gbc);
+        CadUs.add(nomeDonoLabel, gbc);
 
-        nomeDonoField = new JTextField(15);
+        nomeDonoField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 0;
-        add(nomeDonoField, gbc);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        CadUs.add(nomeDonoField, gbc);
 
         // CPF
-        JLabel cpfLabel = new JLabel("Cpf");
+        JLabel cpfLabel = new JLabel("CPF:");
         gbc.gridx = 0;
         gbc.gridy = 1;
-        add(cpfLabel, gbc);
+        gbc.fill = GridBagConstraints.NONE;
+        CadUs.add(cpfLabel, gbc);
 
-        cpfField = new JTextField(15);
+        cpfField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        add(cpfField, gbc);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        CadUs.add(cpfField, gbc);
 
         // Nome do Pet
-        JLabel nomePetLabel = new JLabel("Nome do Pet");
+        JLabel nomePetLabel = new JLabel("Nome do Pet:");
         gbc.gridx = 0;
         gbc.gridy = 2;
-        add(nomePetLabel, gbc);
+        gbc.fill = GridBagConstraints.NONE;
+        CadUs.add(nomePetLabel, gbc);
 
-        nomePetField = new JTextField(15);
+        nomePetField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 2;
-        add(nomePetField, gbc);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        CadUs.add(nomePetField, gbc);
 
         // Espécie do Pet
-        JLabel especiePetLabel = new JLabel("Espécie do Pet");
+        JLabel especiePetLabel = new JLabel("Especie do Pet:");
         gbc.gridx = 0;
         gbc.gridy = 3;
-        add(especiePetLabel, gbc);
+        gbc.fill = GridBagConstraints.NONE;
+        CadUs.add(especiePetLabel, gbc);
 
         especiePetComboBox = new JComboBox<>(new String[]{"Cachorro", "Gato"});
         gbc.gridx = 1;
         gbc.gridy = 3;
-        add(especiePetComboBox, gbc);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        CadUs.add(especiePetComboBox, gbc);
+
+        // Painel para os botões
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 
         // Botão Adicionar
         adicionarButton = new JButton("Adicionar");
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
         adicionarButton.addActionListener(e -> {
             String nomePet = nomePetField.getText();
             cadastroController.addPet(nomePet);
+            System.out.println(cadastroController.getDono().getPets());
+            nomePetField.setText("");
         });
-        add(adicionarButton, gbc);
+        buttonPanel.add(adicionarButton);
 
         // Botão Concluir
         concluirButton = new JButton("Concluir");
-        gbc.gridx = 1;
-        gbc.gridy = 4;
         concluirButton.addActionListener(e -> {
             String nomeDono = nomeDonoField.getText();
             String cpf = cpfField.getText();
             cadastroController.addCadastro(nomeDono, cpf);
+            cadastroController.adicionaNatabela();
+            nomeDonoField.setText("");
+            cpfField.setText("");
+            nomePetField.setText("");
         });
-        add(concluirButton, gbc);
+        buttonPanel.add(concluirButton);
+
+        // Botão Tabela
+        jButton1 = new JButton("Tabela");
+        jButton1.addActionListener(evt -> openTable());
+        buttonPanel.add(jButton1);
+
+        // Adicionando o painel de botões à janela
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        CadUs.add(buttonPanel, gbc);
     }
 
     public void openTable() {
         tableTestWindow.setVisible(true);
     }
 
+    public void mostrar() {
+        CadUs.setVisible(true);
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             CadastroDonoPet tela = new CadastroDonoPet();
-            tela.setVisible(true);
+            tela.mostrar();
         });
     }
+
+
 }

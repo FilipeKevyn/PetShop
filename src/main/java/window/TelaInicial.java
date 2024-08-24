@@ -7,8 +7,8 @@ import javax.swing.SwingUtilities;
 
 public class TelaInicial extends JFrame {
 
-    private JButton jButton1;
     private JButton jButton2;
+    private JButton jButton3;  // Botão "CADASTRAR USUARIO"
     private JPanel jPanel1;
 
     public TelaInicial() {
@@ -18,16 +18,17 @@ public class TelaInicial extends JFrame {
     private void initComponents() {
 
         jPanel1 = new JPanel();
-        jButton1 = new JButton();
         jButton2 = new JButton();
+        jButton3 = new JButton();  // Inicializando o botão "CADASTRAR USUARIO"
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        jButton1.setText("CADASTRO");
-        jButton1.addActionListener(evt -> openCadastro());
-
         jButton2.setText("AGENDAR");
         jButton2.addActionListener(evt -> openAgendar());
+
+        // Configurando o botão "CADASTRAR USUARIO"
+        jButton3.setText("CADASTRAR USUARIO");
+        jButton3.addActionListener(evt -> openCadastrarUsuario1());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -36,18 +37,18 @@ public class TelaInicial extends JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE) // Botão "CADASTRAR USUARIO"
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)) // Botão "AGENDAR"
                                 .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(73, 73, 73)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE) // Botão "CADASTRAR USUARIO"
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(135, Short.MAX_VALUE))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE) // Botão "AGENDAR"
+                                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -70,16 +71,14 @@ public class TelaInicial extends JFrame {
         pack();
     }
 
-    private void openCadastro() {
-        CadastroWindow telaCad = new CadastroWindow();
-        telaCad.setVisible(true);
-//        setEnabled(false);
-    }
-
     private void openAgendar() {
         AgendarWindow telaAgendar = new AgendarWindow();
         telaAgendar.mostrar();
-        //telaAgendar.setVisible(true);
+    }
+
+    private void openCadastrarUsuario1(){
+        CadastroDonoPet cadastroDono = new CadastroDonoPet();
+        cadastroDono.mostrar();
     }
 
     public static void main(String[] args) {
