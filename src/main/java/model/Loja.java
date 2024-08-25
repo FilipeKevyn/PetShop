@@ -32,6 +32,12 @@ return cadastrados;
     public List<Procedimento> getProcedimentos() {
         return procedimentos;
     }
+
+    public void addProcedimentos(String nome, long tempo, double preco) {
+        Procedimento procedimento = new Procedimento(nome, tempo, preco);
+        procedimentos.add(procedimento);
+    }
+
     public Dono verificarCpf(String cpf){
         for(Dono dono : getCadastrados()){
             if (cpf == null){

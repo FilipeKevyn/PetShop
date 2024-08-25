@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -9,11 +11,14 @@ public class Agendamento implements Serializable {
     private Pet pet;
     private Dono dono;
     private List<Procedimento> procedimentos;
+    private LocalDateTime dateTime;
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("kk:mm");
 
     public Agendamento(Dono dono, Pet pet, List<Procedimento> procedimentos){
         this.dono = dono;
         this.pet = pet;
         this.procedimentos = procedimentos;
+        dateTime = LocalDateTime.now();
     }
 
     public Pet getPet() {
@@ -28,8 +33,20 @@ public class Agendamento implements Serializable {
         return procedimentos;
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
     @Override
     public String toString() {
-        return String.format("[dono = %s; nome do pet = %s; especie = %s; procedimentos = null;]",dono.getNome(),pet.getNome(),pet.getEspecie());
+        return String.format("[dono = %s; nome do pet = %s; especie = %s; procedimentos = null; horário = %s]",
+            dono.getNome(),
+            pet.getNome(),
+            pet.getEspecie(),
+            getDateTime().format(dtf));
     }
 }
