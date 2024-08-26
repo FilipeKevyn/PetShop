@@ -10,7 +10,10 @@ import java.util.List;
 
 public class AgendaController {
     private List<Pet> pets = new ArrayList<>();
-    private Loja loja = new Loja();
+    private Loja loja;
+    public AgendaController(Loja loja){
+        this.loja = loja;
+    }
 
     public Agendamento addAgendamento(String dono, String cpf, String nome_pet, String especie, List<Procedimento> procedimentos){
         Dono donoPet = new Dono(dono, cpf);
