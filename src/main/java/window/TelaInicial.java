@@ -77,7 +77,7 @@ public class TelaInicial extends JFrame {
     }
 
     private void openCadastrarUsuario1(){
-        CadastroDonoPet cadastroDono = new CadastroDonoPet();
+        CadastroWindow cadastroDono = new CadastroWindow();
         cadastroDono.mostrar();
     }
 

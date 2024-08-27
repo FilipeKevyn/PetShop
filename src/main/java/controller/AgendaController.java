@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgendaController {
+public class AgendaController{
     private List<Pet> pets = new ArrayList<>();
     private Loja loja;
     public AgendaController(Loja loja){

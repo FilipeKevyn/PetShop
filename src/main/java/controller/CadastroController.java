@@ -20,7 +20,6 @@ public class CadastroController {
         dono.setNome(nome);
         dono.setCpf(cpf);
         loja.getCadastrados().add(dono);
-        adicionaNatabela();
 
         dono = new Dono();
         return dono;
@@ -33,11 +32,6 @@ public class CadastroController {
         return dono.getPets();
     }
 
-    public void adicionaNatabela() {
-        if (!dono.getPets().isEmpty()) {
-            tableTestWindow.adicionarLinha(dono.getNome(), dono.getCpf(), dono.getPets().get(0));
-        }
-    }
 
     public Dono getDono() {
         return dono;
