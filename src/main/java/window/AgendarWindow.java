@@ -51,8 +51,16 @@ public class AgendarWindow extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+
+        // colocar em um buttongroup
+        buttonGroup = new ButtonGroup();
+
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+
+        buttonGroup.add(jRadioButton1);
+        buttonGroup.add(jRadioButton2);
+
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -252,6 +260,7 @@ public class AgendarWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify
+    private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
