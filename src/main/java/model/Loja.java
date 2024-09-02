@@ -1,6 +1,8 @@
 package model;
 
+import javax.swing.table.DefaultTableModel;
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,27 @@ public class Loja implements Serializable {
 
     public List<Agendamento> getAgendamentos() {
         return agendamentos;
+    }
+
+    public DefaultTableModel getAgendamentoModel() {
+        Object[][] dados = new Object[agendamentos.size()][6];
+
+        for (int i = 0; i < agendamentos.size(); i++) {
+            Agendamento a = agendamentos.get(i);
+            dados[i] = new Object[] {
+                    a.getPet().getNome(),
+                    a.getPet().getEspecie(),
+                    a.getDateTime().format(DateTimeFormatter.ofPattern("kk:mm")),
+                    a.qtdprocedimento(),
+                    a.valorTotal()};
+        }
+
+        DefaultTableModel tableModel = new DefaultTableModel(dados,
+            new String[]{
+                    "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
+            });
+
+        return tableModel;
     }
 
     public List<Dono> getCadastrados() {

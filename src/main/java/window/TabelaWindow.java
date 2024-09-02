@@ -1,18 +1,22 @@
 package window;
 
-import javax.swing.*;
+import controller.AgendaController;
+import model.Loja;
+
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Agendamento extends javax.swing.JFrame {
+public class TabelaWindow extends javax.swing.JFrame {
 
     private boolean isEditable = false;
-
-    public Agendamento() {
+    private AgendaController agendaController;
+    public TabelaWindow() {
         initComponents();
+//        agendaController = new AgendaController();
     }
 
     @SuppressWarnings("unchecked")
@@ -20,33 +24,42 @@ public class Agendamento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-
-        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDate = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("kk:mm");
         String formattedDate = currentDate.format(formatter);
+        String formattedTime = currentDate.format(timeFormatter);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {"chico", "nina", "gato",formattedDate,"banho", 20},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
-                },
-                new String[]{
-                        "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
-                }
-        ) {
+//        DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{
+//                {"chico", "nina", "gato",formattedTime,"banho", 20}
+//        },
+//                new String[]{
+//                        "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
+//                });
+        //jTable1 = new javax.swing.JTable(tableModel);
 
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return isEditable;
-            }
-        });
+//        tableModel.addRow(new Object[]{"chico", "nina", "gato",formattedTime,"banho", 20});
+//        jTable1.getModel().
+//        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+//                new Object[][]{
+//                        {"chico", "nina", "gato",formattedTime,"banho", 20}
+//                },
+//                new String[]{
+//                        "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
+//                }
+//        ) {
+//
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                return isEditable;
+//            }
+//        });
+//
+//        jTable1.setModel();
 
         jTable1.setToolTipText("");
         jScrollPane1.setViewportView(jTable1);
@@ -117,6 +130,11 @@ public class Agendamento extends javax.swing.JFrame {
         pack();
     }
 
+    public void atualizar() {
+        // DefaultTableModel model = agendaController.getAgendamentoModel()
+        // jTable1.setModel(model)
+    }
+
     private void removeSelectedRows() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int[] selectedRows = jTable1.getSelectedRows(); // Obtém as linhas selecionadas
@@ -137,18 +155,18 @@ public class Agendamento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Agendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Agendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Agendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Agendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Agendamento().setVisible(true);
+                new TabelaWindow().setVisible(true);
             }
         });
     }
