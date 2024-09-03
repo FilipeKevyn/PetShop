@@ -2,14 +2,18 @@ package window;
 
 import controller.AgendaController;
 import model.Loja;
+import validators.CPFvalidator;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.text.ParseException;
 import java.util.Vector;
 
 public class AgendarWindow extends javax.swing.JFrame {
-    private Loja loja = new Loja();
-    private AgendaController agendaController = new AgendaController(loja);
+    private Loja loja = Loja.getInstance();
+    private AgendaController agendaController = new AgendaController();
+    private CPFvalidator cpfValidator;
     private Vector lista_pet;
 
     public AgendarWindow() {
@@ -20,11 +24,11 @@ public class AgendarWindow extends javax.swing.JFrame {
     private void initComponents() {
         // Inicializar os componentes
         jPanel1 = new JPanel();
-        jLabel1 = new JLabel("CPF");
-        jTextField1 = new JTextField(15);
-        jButton1 = new JButton("OK");
+        cpfLabel = new JLabel("CPF");
+        cpfTextfield = new JFormattedTextField();
+        okButton = new JButton("OK");
 
-        jLabel2 = new JLabel("Pet");
+        petLabel = new JLabel("Pet");
         jComboBox1 = new JComboBox<>();
         try {
             jComboBox1.setModel(new DefaultComboBoxModel<>(lista_pet));
@@ -32,14 +36,14 @@ public class AgendarWindow extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-        jLabel4 = new JLabel("Nome do Dono");
-        jTextField3 = new JTextField(15);
+        donoLabel = new JLabel("Nome do Dono");
+        donoTextField = new JTextField(15);
 
         buttonGroup = new ButtonGroup();
-        jRadioButton1 = new JRadioButton("Cachorro");
-        jRadioButton2 = new JRadioButton("Gato");
-        buttonGroup.add(jRadioButton1);
-        buttonGroup.add(jRadioButton2);
+        dogRadioButton = new JRadioButton("Cachorro");
+        catRadioButton = new JRadioButton("Gato");
+        buttonGroup.add(dogRadioButton);
+        buttonGroup.add(catRadioButton);
 
         jLabel5 = new JLabel("Especie");
         jLabel6 = new JLabel("Procedimentos");
@@ -47,16 +51,22 @@ public class AgendarWindow extends javax.swing.JFrame {
         jList1 = new JList<>(new String[]{"Cortar Unhas", "Banho", "Tosa"});
         jScrollPane1 = new JScrollPane(jList1);
 
-        jButton2 = new JButton("Adicionar");
+        adicionarButton = new JButton("Adicionar");
         jButton3 = new JButton("Concluir");
 
         // Configurar as ações dos botões
-        jButton1.addActionListener(e -> {
-            this.lista_pet = new Vector(agendaController.atualizarCombo(jTextField1.getText()));
-            jComboBox1.setModel(new DefaultComboBoxModel<>(lista_pet));
+        okButton.addActionListener(e -> {
+            if (!cpfValidator.validar(cpfTextfield.getText())){
+                JOptionPane.showMessageDialog(null,"Dono não encontrado", "CPF error",JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                // verifica o dono e retorna a lista de pet para o combo box
+            }
+//            this.lista_pet = new Vector(agendaController.atualizarCombo(cpfTextfield.getText()));
+//            jComboBox1.setModel(new DefaultComboBoxModel<>(lista_pet));
         });
 
-        jTextField3.addActionListener(evt -> jTextField3ActionPerformed(evt));
+        donoTextField.addActionListener(evt -> jTextField3ActionPerformed(evt));
 
         // Definir layout principal como GridBagLayout
         setLayout(new GridBagLayout());
@@ -67,38 +77,46 @@ public class AgendarWindow extends javax.swing.JFrame {
         // Adicionar os componentes ao layout
         c.gridx = 0;
         c.gridy = 0;
-        add(jLabel1, c);
+        add(cpfLabel, c);
 
         c.gridx = 1;
-        add(jTextField1, c);
+        MaskFormatter maskcpf = null;
+        try {
+            maskcpf = new MaskFormatter("###.###.###-##");
+        } catch (ParseException e){
+            throw new RuntimeException();
+        }
+        maskcpf.install(cpfTextfield);
+        add(cpfTextfield, c);
+
 
         c.gridx = 2;
-        add(jButton1, c);
+        add(okButton, c);
 
         c.gridx = 0;
         c.gridy = 1;
-        add(jLabel2, c);
+        add(petLabel, c);
 
         c.gridx = 1;
         add(jComboBox1, c);
 
         c.gridx = 0;
         c.gridy = 2;
-        add(jLabel4, c);
+        add(donoLabel, c);
 
         c.gridx = 1;
-        add(jTextField3, c);
+        add(donoTextField, c);
 
         c.gridx = 0;
         c.gridy = 3;
         add(jLabel5, c);
 
         c.gridx = 1;
-        add(jRadioButton1, c);
+        add(dogRadioButton, c);
 
         c.gridx = 1;
         c.gridy = 4;
-        add(jRadioButton2, c);
+        add(catRadioButton, c);
 
         c.gridx = 0;
         c.gridy = 5;
@@ -110,7 +128,7 @@ public class AgendarWindow extends javax.swing.JFrame {
 
         c.gridy = 7;
         c.gridwidth = 1;
-        add(jButton2, c);
+        add(adicionarButton, c);
 
         c.gridx = 2;
         c.gridy = 7;
@@ -135,20 +153,20 @@ public class AgendarWindow extends javax.swing.JFrame {
     }
 
     private javax.swing.ButtonGroup buttonGroup;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton okButton;
+    private javax.swing.JButton adicionarButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel cpfLabel;
+    private javax.swing.JLabel petLabel;
+    private javax.swing.JLabel donoLabel;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton dogRadioButton;
+    private javax.swing.JRadioButton catRadioButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JFormattedTextField cpfTextfield;
+    private javax.swing.JTextField donoTextField;
 }

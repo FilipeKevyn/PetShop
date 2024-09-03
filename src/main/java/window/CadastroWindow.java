@@ -1,23 +1,26 @@
 package window;
 
 import controller.CadastroController;
+import validators.CPFvalidator;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.text.ParseException;
 
 public class CadastroWindow {
 
     private JTextField nomeDonoField;
     private JFrame CadUs;
-    private JTextField cpfField;
+    private JFormattedTextField cpfField;
     private JTextField nomePetField;
     private JComboBox<String> especiePetComboBox;
     private JButton adicionarButton;
     private JButton concluirButton;
     private JButton jButton1;
-
     private TableTestWindow tableTestWindow;
     private CadastroController cadastroController;
+    private CPFvalidator cpfValidator;
 
     public CadastroWindow() {
         CadUs = new JFrame("Cadastro Dono");
@@ -25,8 +28,7 @@ public class CadastroWindow {
         CadUs.setSize(400, 300);
         CadUs.setLocationRelativeTo(null);
 
-        tableTestWindow = new TableTestWindow();
-        cadastroController = new CadastroController(tableTestWindow);
+        cadastroController = new CadastroController();
 
         // Configurando layout
         CadUs.setLayout(new GridBagLayout());
@@ -53,10 +55,17 @@ public class CadastroWindow {
         gbc.fill = GridBagConstraints.NONE;
         CadUs.add(cpfLabel, gbc);
 
-        cpfField = new JTextField(20);
+        cpfField = new JFormattedTextField();
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        MaskFormatter maskCPF = null;
+        try {
+            maskCPF = new MaskFormatter("###.###.###-##");
+        } catch (ParseException e){
+            throw new RuntimeException();
+        }
+        maskCPF.install(cpfField);
         CadUs.add(cpfField, gbc);
 
         // Nome do Pet
@@ -104,14 +113,21 @@ public class CadastroWindow {
         concluirButton.addActionListener(e -> {
             String nomeDono = nomeDonoField.getText();
             String cpf = cpfField.getText();
-            cadastroController.addCadastro(nomeDono, cpf);
+
+            if (cpfValidator.validar(cpf)){
+                JOptionPane.showMessageDialog(null,"Dono já cadastrado", "CPF error",JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                cadastroController.addCadastro(nomeDono, cpf);
+            }
+
             nomeDonoField.setText("");
             cpfField.setText("");
             nomePetField.setText("");
         });
         buttonPanel.add(concluirButton);
 
-        // Botão Tabela
+        // Botão Tabela - pensar dps se essa tabela deve continuar. provavelmente não vai ficar.
         jButton1 = new JButton("Tabela");
         jButton1.addActionListener(evt -> openTable());
         buttonPanel.add(jButton1);

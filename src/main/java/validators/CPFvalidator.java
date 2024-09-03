@@ -7,7 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CPFvalidator implements Validator<String>{
-    public boolean verificarSeExiste(Loja loja, String cpf){
+    private Loja loja = Loja.getInstance();
+
+    public boolean verificarSeExiste(String cpf){
         for (Dono dono : loja.getCadastrados()){
             if (dono.getCpf().equals(cpf)){
                 return true;
@@ -23,6 +25,6 @@ public class CPFvalidator implements Validator<String>{
         Matcher matcher = pattern.matcher(cpf);
 
         // falta implementar validar se o cpf não é igual a outro da lista
-        return matcher.matches();
+        return matcher.matches() && verificarSeExiste(cpf);
     }
 }
