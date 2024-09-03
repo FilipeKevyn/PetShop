@@ -19,7 +19,7 @@ public class CadastroWindow {
     private JButton concluirButton;
     private JButton jButton1;
     private TableTestWindow tableTestWindow;
-    private CPFvalidator cpfValidator;
+    private CPFvalidator cpfValidator = new CPFvalidator() ;
     private CadastroController cadastroController = CadastroController.getInstance();
 
     public CadastroWindow() {
@@ -114,16 +114,15 @@ public class CadastroWindow {
             String nomeDono = nomeDonoField.getText();
             String cpf = cpfField.getText();
 
-            if (cpfValidator.validar(cpf)){
-                JOptionPane.showMessageDialog(null,"Dono já cadastrado", "CPF error",JOptionPane.ERROR_MESSAGE);
-            }
-            else {
+            if (cpfValidator.validar(cpf)) {
+                JOptionPane.showMessageDialog(null, "Dono já cadastrado", "CPF error", JOptionPane.ERROR_MESSAGE);
+            } else {
                 cadastroController.addCadastro(nomeDono, cpf);
+                System.out.println(cadastroController.getLoja().getCadastrados());
+                nomeDonoField.setText("");
+                cpfField.setText("");
+                nomePetField.setText("");
             }
-
-            nomeDonoField.setText("");
-            cpfField.setText("");
-            nomePetField.setText("");
         });
         buttonPanel.add(concluirButton);
 

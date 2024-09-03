@@ -6,6 +6,7 @@ import model.Loja;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +41,7 @@ public class TabelaWindow extends javax.swing.JFrame {
 //                new String[]{
 //                        "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
 //                });
-        //jTable1 = new javax.swing.JTable(tableModel);
+//        jTable1 = new javax.swing.JTable(tableModel);
 
 //        tableModel.addRow(new Object[]{"chico", "nina", "gato",formattedTime,"banho", 20});
 //        jTable1.getModel().
@@ -60,8 +61,12 @@ public class TabelaWindow extends javax.swing.JFrame {
 //        });
 //
 //        jTable1.setModel();
+        try {
+            jTable1.setToolTipText("");
+        }
+        catch (NullPointerException e) {
 
-        jTable1.setToolTipText("");
+        }
         jScrollPane1.setViewportView(jTable1);
 
 

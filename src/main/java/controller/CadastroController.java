@@ -10,7 +10,7 @@ import java.util.List;
 public class CadastroController {
     private Loja loja = Loja.getInstance();
     private TableTestWindow tableTestWindow;
-    private Dono dono = new Dono();
+    private Dono dono = new Dono(); // remover esta inicialização e colocala dentro do construtor
     private static CadastroController instance;
     private CadastroController() {
     }

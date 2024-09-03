@@ -69,6 +69,9 @@ return cadastrados;
         procedimentos.add(procedimento);
     }
 
+
+    // utilizar stream para buscar o dono através do filter e getfirst
+
     public Dono verificarCpf(String cpf){
         for(Dono dono : getCadastrados()){
             if (cpf == null){
