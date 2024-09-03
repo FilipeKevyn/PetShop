@@ -58,7 +58,7 @@ public class Agendamento implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("dono = %s; nome do pet = %s; especie = %s; horário = %s; Qtd. Procedimentos %s; Valor: %s",
+        return String.format("{dono = %s; nome do pet = %s; especie = %s; horário = %s; Qtd. Procedimentos %s; Valor: %s}",
             dono.getNome(),
             pet.getNome(),
             pet.getEspecie(),

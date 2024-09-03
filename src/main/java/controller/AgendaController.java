@@ -11,7 +11,15 @@ import java.util.List;
 public class AgendaController{
     private List<Pet> pets = new ArrayList<>();
     private Loja loja = Loja.getInstance();
-    public AgendaController(){
+    private static AgendaController instance;
+    private AgendaController(){
+    }
+
+    public static AgendaController getInstance() {
+        if (instance == null){
+            instance = new AgendaController();
+        }
+        return instance;
     }
 
     public Agendamento addAgendamento(String dono, String cpf, String nome_pet, String especie, List<Procedimento> procedimentos){

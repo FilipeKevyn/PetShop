@@ -1,18 +1,17 @@
 package window;
 
 import controller.AgendaController;
-import model.Loja;
 import validators.CPFvalidator;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Vector;
 
 public class AgendarWindow extends javax.swing.JFrame {
-    private Loja loja = Loja.getInstance();
-    private AgendaController agendaController = new AgendaController();
+    private AgendaController agendaController = AgendaController.getInstance();
     private CPFvalidator cpfValidator;
     private Vector lista_pet;
 
@@ -51,7 +50,12 @@ public class AgendarWindow extends javax.swing.JFrame {
         jList1 = new JList<>(new String[]{"Cortar Unhas", "Banho", "Tosa"});
         jScrollPane1 = new JScrollPane(jList1);
 
+
+
         adicionarButton = new JButton("Adicionar");
+        adicionarButton.addActionListener(e -> {
+
+        });
         jButton3 = new JButton("Concluir");
 
         // Configurar as ações dos botões

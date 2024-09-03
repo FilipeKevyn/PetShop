@@ -19,8 +19,8 @@ public class CadastroWindow {
     private JButton concluirButton;
     private JButton jButton1;
     private TableTestWindow tableTestWindow;
-    private CadastroController cadastroController;
     private CPFvalidator cpfValidator;
+    private CadastroController cadastroController = CadastroController.getInstance();
 
     public CadastroWindow() {
         CadUs = new JFrame("Cadastro Dono");
@@ -28,7 +28,7 @@ public class CadastroWindow {
         CadUs.setSize(400, 300);
         CadUs.setLocationRelativeTo(null);
 
-        cadastroController = new CadastroController();
+
 
         // Configurando layout
         CadUs.setLayout(new GridBagLayout());

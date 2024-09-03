@@ -9,10 +9,17 @@ import java.util.List;
 
 public class CadastroController {
     private Loja loja = Loja.getInstance();
-    private Dono dono = new Dono();
     private TableTestWindow tableTestWindow;
+    private Dono dono = new Dono();
+    private static CadastroController instance;
+    private CadastroController() {
+    }
 
-    public CadastroController() {
+    public static CadastroController getInstance() {
+        if (instance == null){
+            instance = new CadastroController();
+        }
+        return instance;
     }
 
     public Dono addCadastro(String nome, String cpf) {
