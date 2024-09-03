@@ -51,7 +51,6 @@ public class AgendaController{
         for (Agendamento agendamento : loja.getAgendamentos()){
             tempo += somarTempo(agendamento);
         }
-
         return tempo;
     }
 

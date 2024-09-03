@@ -26,10 +26,6 @@ public class Procedimento {
         return tempo;
     }
 
-    public void setTempo(int tempo) {
-        this.tempo = tempo;
-    }
-
     public double getPreco() {
         return preco;
     }

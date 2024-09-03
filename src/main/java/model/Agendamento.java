@@ -41,12 +41,29 @@ public class Agendamento implements Serializable {
         this.dateTime = dateTime;
     }
 
+    public double valorTotal(){
+        double valor = 0;
+        for (Procedimento procedimento : procedimentos) {
+            valor += procedimento.getPreco();
+        }
+        return valor;
+    }
+    public int qtdprocedimento(){
+        int quantidade = 0;
+        for (Procedimento procedimento : procedimentos){
+            quantidade ++;
+        }
+        return quantidade;
+    }
+
     @Override
     public String toString() {
-        return String.format("[dono = %s; nome do pet = %s; especie = %s; procedimentos = null; horário = %s]",
+        return String.format("dono = %s; nome do pet = %s; especie = %s; horário = %s; Qtd. Procedimentos %s; Valor: %s",
             dono.getNome(),
             pet.getNome(),
             pet.getEspecie(),
-            getDateTime().format(dtf));
+            getDateTime().format(dtf),
+            qtdprocedimento(),
+            valorTotal());
     }
 }
