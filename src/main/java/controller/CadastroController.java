@@ -8,12 +8,11 @@ import window.TableTestWindow;
 import java.util.List;
 
 public class CadastroController {
-    private Loja loja = new Loja();
+    private Loja loja = Loja.getInstance();
     private Dono dono = new Dono();
     private TableTestWindow tableTestWindow;
 
-    public CadastroController(TableTestWindow tableTestWindow) {
-        this.tableTestWindow = tableTestWindow;
+    public CadastroController() {
     }
 
     public Dono addCadastro(String nome, String cpf) {

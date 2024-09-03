@@ -12,11 +12,19 @@ public class Loja implements Serializable {
     private List<Pet> pets;
     private List<Procedimento> procedimentos;
 
-    public Loja() {
+    private static Loja instance;
+    private Loja() {
         agendamentos = new ArrayList<>();
         cadastrados = new ArrayList<>();
         pets = new ArrayList<>();
         procedimentos = new ArrayList<>();
+    }
+
+    public static Loja getInstance() {
+        if (instance == null){
+            instance = new Loja();
+        }
+        return instance;
     }
 
     public List<Agendamento> getAgendamentos() {

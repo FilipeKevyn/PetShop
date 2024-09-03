@@ -10,9 +10,8 @@ import java.util.List;
 
 public class AgendaController{
     private List<Pet> pets = new ArrayList<>();
-    private Loja loja;
-    public AgendaController(Loja loja){
-        this.loja = loja;
+    private Loja loja = Loja.getInstance();
+    public AgendaController(){
     }
 
     public Agendamento addAgendamento(String dono, String cpf, String nome_pet, String especie, List<Procedimento> procedimentos){
