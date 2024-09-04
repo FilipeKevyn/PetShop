@@ -37,10 +37,10 @@ public class Main {
         procedimentos2.add(loja.getProcedimentos().get(1));
         procedimentos2.add(loja.getProcedimentos().get(2));
 
-        //ArrayList<Procedimento> procedimentos = loja;
-        agendaController.addAgendamento("Filipe", "1234",
-                "Dudu", "Cachorro", procedimentos);
-        agendaController.addAgendamento("Beto", "321","Bixano","Gato",procedimentos2);
+//        //ArrayList<Procedimento> procedimentos = loja;
+//        agendaController.addAgendamento("Filipe", "1234",
+//                "Dudu", "Cachorro", procedimentos);
+//        agendaController.addAgendamento("Beto", "321","Bixano","Gato",procedimentos2);
 
         System.out.println(loja.getAgendamentos());
         System.out.println(loja.getCadastrados());

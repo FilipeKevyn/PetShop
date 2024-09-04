@@ -53,7 +53,7 @@ public class Loja implements Serializable {
     }
 
     public List<Dono> getCadastrados() {
-return cadastrados;
+        return cadastrados;
     }
 
     public List<Pet> getPets() {
@@ -69,18 +69,8 @@ return cadastrados;
         procedimentos.add(procedimento);
     }
 
-
-    // utilizar stream para buscar o dono através do filter e getfirst
-
-    public Dono verificarCpf(String cpf){
-        for(Dono dono : getCadastrados()){
-            if (cpf == null){
-                return null;
-            }
-            if (dono.getCpf().equals(cpf)){
-                return dono;
-            }
-        }
-        return null;
+    public Dono buscarDono(String cpf) {
+        Dono dono = (Dono) cadastrados.stream().filter(e -> e.getCpf().equals(cpf)).findFirst().orElse(null);
+        return dono;
     }
 }

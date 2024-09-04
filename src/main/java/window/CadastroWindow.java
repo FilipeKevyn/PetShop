@@ -9,7 +9,7 @@ import java.awt.*;
 import java.text.ParseException;
 
 public class CadastroWindow {
-
+    private String cpf;
     private JTextField nomeDonoField;
     private JFrame CadUs;
     private JFormattedTextField cpfField;
@@ -102,9 +102,14 @@ public class CadastroWindow {
         adicionarButton.addActionListener(e -> {
             String nome_pet = nomePetField.getText();
             String especie = especiePetComboBox.getSelectedItem().toString();
-            cadastroController.addPet(nome_pet,especie);
-            System.out.println(cadastroController.getDono().getPets());
-            nomePetField.setText("");
+            cpf = cpfField.getText();
+            if (cpfValidator.validar(cpf)) {
+                JOptionPane.showMessageDialog(null, "Dono já cadastrado", "CPF error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                cadastroController.addPet(nome_pet,especie);
+                System.out.println(cadastroController.getDono().getPets());
+                nomePetField.setText("");
+            }
         });
         buttonPanel.add(adicionarButton);
 
@@ -112,7 +117,7 @@ public class CadastroWindow {
         concluirButton = new JButton("Concluir");
         concluirButton.addActionListener(e -> {
             String nomeDono = nomeDonoField.getText();
-            String cpf = cpfField.getText();
+            cpf = cpfField.getText();
 
             if (cpfValidator.validar(cpf)) {
                 JOptionPane.showMessageDialog(null, "Dono já cadastrado", "CPF error", JOptionPane.ERROR_MESSAGE);

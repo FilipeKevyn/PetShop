@@ -36,6 +36,6 @@ public class Procedimento {
 
     @Override
     public String toString() {
-        return "[" + nome + "," + tempo + "," + preco + "]";
+        return nome + " R$ " + preco;
     }
 }

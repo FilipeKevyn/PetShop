@@ -3,6 +3,7 @@ package controller;
 import model.Dono;
 import model.Loja;
 import model.Pet;
+import window.CadastroWindow;
 import window.TableTestWindow;
 
 import java.util.List;
@@ -10,11 +11,10 @@ import java.util.List;
 public class CadastroController {
     private Loja loja = Loja.getInstance();
     private TableTestWindow tableTestWindow;
-    private Dono dono = new Dono(); // remover esta inicialização e colocala dentro do construtor
+    private Dono dono = new Dono();
     private static CadastroController instance;
     private CadastroController() {
     }
-
     public static CadastroController getInstance() {
         if (instance == null){
             instance = new CadastroController();
@@ -38,8 +38,11 @@ public class CadastroController {
         return dono.getPets();
     }
 
-
     public Dono getDono() {
         return dono;
+    }
+
+    public Loja getLoja() {
+        return loja;
     }
 }

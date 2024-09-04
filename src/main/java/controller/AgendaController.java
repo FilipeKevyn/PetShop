@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaController{
-    private List<Pet> pets = new ArrayList<>();
     private Loja loja = Loja.getInstance();
     private static AgendaController instance;
     private AgendaController(){
@@ -22,9 +21,8 @@ public class AgendaController{
         return instance;
     }
 
-    public Agendamento addAgendamento(String dono, String cpf, String nome_pet, String especie, List<Procedimento> procedimentos){
+    public Agendamento addAgendamento(String dono, String cpf, Pet pet, List<Procedimento> procedimentos){
         Dono donoPet = new Dono(dono, cpf);
-        Pet pet = new Pet(nome_pet, especie);
         Agendamento agendamento = new Agendamento(donoPet, pet, procedimentos);
 
         // se não for o primeiro agendamento, irá mudar o tempo
@@ -37,7 +35,7 @@ public class AgendaController{
     }
 
     public List<Pet> atualizarCombo(String cpf){
-        pets = loja.verificarCpf(cpf).getPets(); // verificarCpf retorna um dono, então pegamos a lista de pet desse dono
+        List<Pet> pets = loja.buscarDono(cpf).getPets(); // verificarCpf retorna um dono, então pegamos a lista de pet desse dono
 
         return pets;
     }
@@ -66,5 +64,9 @@ public class AgendaController{
         LocalDateTime tempofinal = agendamento.getDateTime().plusMinutes(minutofinal);
 
         agendamento.setDateTime(tempofinal);
+    }
+
+    public Loja getLoja() {
+        return loja;
     }
 }

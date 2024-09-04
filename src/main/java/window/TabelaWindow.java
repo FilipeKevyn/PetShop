@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class TabelaWindow extends javax.swing.JFrame {
 
     private boolean isEditable = false;
+    private Loja loja = Loja.getInstance();
     private AgendaController agendaController;
     public TabelaWindow() {
         initComponents();
@@ -36,48 +37,27 @@ public class TabelaWindow extends javax.swing.JFrame {
         String formattedTime = currentDate.format(timeFormatter);
 
 //        DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{
-//                {"chico", "nina", "gato",formattedTime,"banho", 20}
+//                {"chico", "nina", "gato", formattedTime, "banho", 20}
 //        },
 //                new String[]{
 //                        "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
-//                });
-//        jTable1 = new javax.swing.JTable(tableModel);
-
-//        tableModel.addRow(new Object[]{"chico", "nina", "gato",formattedTime,"banho", 20});
-//        jTable1.getModel().
-//        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-//                new Object[][]{
-//                        {"chico", "nina", "gato",formattedTime,"banho", 20}
-//                },
-//                new String[]{
-//                        "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
-//                }
-//        ) {
+//                }) {
 //
 //            @Override
 //            public boolean isCellEditable(int row, int column) {
 //                return isEditable;
 //            }
-//        });
-//
-//        jTable1.setModel();
-        try {
-            jTable1.setToolTipText("");
-        }
-        catch (NullPointerException e) {
+//        };
+        jTable1 = new javax.swing.JTable(loja.getAgendamentoModel());
 
-        }
         jScrollPane1.setViewportView(jTable1);
-
 
         jLabel1.setText("Agenda  " + formattedDate);
 
         jButton1.setText("Editar");
         jButton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                isEditable = !isEditable;
-                jTable1.setEnabled(isEditable);
-                jTable1.repaint();
+                toggleEditMode();
             }
         });
 
@@ -131,13 +111,16 @@ public class TabelaWindow extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
+        setLocationRelativeTo(null);
         pack();
     }
 
-    public void atualizar() {
-        // DefaultTableModel model = agendaController.getAgendamentoModel()
-        // jTable1.setModel(model)
+    private void toggleEditMode() {
+        isEditable = !isEditable;
+        // Update table model to reflect editability
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        jTable1.setModel(model); // This triggers the model to update editability
+        jButton1.setText(isEditable ? "Salvar" : "Editar"); // Toggle button text
     }
 
     private void removeSelectedRows() {
@@ -148,6 +131,14 @@ public class TabelaWindow extends javax.swing.JFrame {
         for (int i = selectedRows.length - 1; i >= 0; i--) {
             model.removeRow(selectedRows[i]);
         }
+    }
+
+    public void atualizar() {
+        // Implementar atualização se necessário
+    }
+
+    public void mostrar() {
+        setVisible(true); // Mostrar a janela atual
     }
 
     public static void main(String args[]) {
@@ -169,11 +160,7 @@ public class TabelaWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TabelaWindow().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new TabelaWindow().setVisible(true));
     }
 
     // Variables declaration - do not modify
