@@ -3,6 +3,7 @@ package window;
 import controller.AgendaController;
 import model.Loja;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,8 +15,8 @@ import java.time.format.DateTimeFormatter;
 public class TabelaWindow extends javax.swing.JFrame {
 
     private boolean isEditable = false;
-    private Loja loja = Loja.getInstance();
-    private AgendaController agendaController;
+    private DefaultTableModel tableModel;
+    private AgendaController agendaController = AgendaController.getInstance();
     public TabelaWindow() {
         initComponents();
 //        agendaController = new AgendaController();
@@ -36,19 +37,7 @@ public class TabelaWindow extends javax.swing.JFrame {
         String formattedDate = currentDate.format(formatter);
         String formattedTime = currentDate.format(timeFormatter);
 
-//        DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{
-//                {"chico", "nina", "gato", formattedTime, "banho", 20}
-//        },
-//                new String[]{
-//                        "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
-//                }) {
-//
-//            @Override
-//            public boolean isCellEditable(int row, int column) {
-//                return isEditable;
-//            }
-//        };
-        jTable1 = new javax.swing.JTable(loja.getAgendamentoModel());
+        jTable1.setModel(agendaController.getLoja().getAgendamentoModel());
 
         jScrollPane1.setViewportView(jTable1);
 
@@ -169,6 +158,6 @@ public class TabelaWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable1 = new JTable();
     // End of variables declaration
 }

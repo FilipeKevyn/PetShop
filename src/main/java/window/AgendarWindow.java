@@ -2,8 +2,6 @@ package window;
 
 import controller.AgendaController;
 import controller.CadastroController;
-import model.Especie;
-import model.Loja;
 import model.Pet;
 import model.Procedimento;
 import validators.CPFvalidator;
@@ -14,8 +12,9 @@ import java.awt.*;
 import java.text.ParseException;
 import java.util.List;
 
-public class AgendarWindow extends javax.swing.JFrame {
+public class AgendarWindow extends JFrame {
     private String cpf;
+    private String nomeDono;
     private Pet pet;
     private AgendaController agendaController = AgendaController.getInstance();
     private CPFvalidator cpfValidator;
@@ -56,8 +55,6 @@ public class AgendarWindow extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jListProced);
 
 
-        String dono = donoTextField.getText();
-
         jButton3 = new JButton("Concluir");
 
         // Configurar as ações dos botões
@@ -66,23 +63,30 @@ public class AgendarWindow extends javax.swing.JFrame {
             System.out.println("CPF informado: " + cpf);
 
             if (!cpfValidator.validar(cpf)) {
-                JOptionPane.showMessageDialog(null, "Dono nao encontrado", "CPF error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Dono não encontrado", "CPF error", JOptionPane.ERROR_MESSAGE);
             } else {
-                String nomeDono = agendaController.getLoja().buscarDono(cpf).getNome();
+                nomeDono = agendaController.getLoja().buscarDono(cpf).getNome();
                 System.out.println("Nome do Dono encontrado: " + nomeDono);
                 lista_pet = agendaController.atualizarCombo(cpf);
 
                 if (nomeDono != null) {
                     donoTextField.setText(nomeDono);
-                    pets = lista_pet.toArray(new Pet[0]); // Melhor prática: usar new Pet[0] ao invés de lista_pet.size()
-                    jComboBox1.setModel(new DefaultComboBoxModel<>(pets)); // Corrigir o modelo do combo box
+                    pets = lista_pet.toArray(new Pet[0]);
+
+                    // Limpa o JComboBox e adiciona a opção "Escolha o pet"
+                    jComboBox1.removeAllItems();
+                    jComboBox1.addItem(null);  // Ou "Escolha o pet"
+                    for (Pet pet : pets) {
+                        jComboBox1.addItem(pet);
+                    }
                 }
             }
         });
+
         jComboBox1.addActionListener(e -> {
             pet = (Pet) jComboBox1.getSelectedItem();
             if (pet != null) {
-                if (pet.getEspecie().equals(Especie.CACHORRO)) {
+                if (pet.getEspecie().equals("Cachorro")) {
                     buttonGroup.setSelected(dogRadioButton.getModel(), true);
                 } else {
                     buttonGroup.setSelected(catRadioButton.getModel(), true);
@@ -93,7 +97,7 @@ public class AgendarWindow extends javax.swing.JFrame {
         // Adicionando Agendamento
         adicionarButton = new JButton("Adicionar");
         adicionarButton.addActionListener(e -> {
-            agendaController.addAgendamento(dono,cpf,pet,jListProced.getSelectedValuesList());
+            agendaController.addAgendamento(nomeDono, cpf, pet, jListProced.getSelectedValuesList());
         });
 
         donoTextField.addActionListener(evt -> jTextField3ActionPerformed(evt));
@@ -113,12 +117,11 @@ public class AgendarWindow extends javax.swing.JFrame {
         MaskFormatter maskcpf = null;
         try {
             maskcpf = new MaskFormatter("###.###.###-##");
-        } catch (ParseException e){
+        } catch (ParseException e) {
             throw new RuntimeException();
         }
         maskcpf.install(cpfTextfield);
         add(cpfTextfield, c);
-        // procedimentos
 
         c.gridx = 2;
         add(okButton, c);
@@ -167,7 +170,6 @@ public class AgendarWindow extends javax.swing.JFrame {
         // Centralizar a janela na tela
         pack();
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,17 +178,16 @@ public class AgendarWindow extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new AgendarWindow().setVisible(true));
-        //procedimentos
 
-//        dono1
+        // Inicialização de cadastros para testes
         CadastroController cadastroController = CadastroController.getInstance();
-        cadastroController.addCadastro("rapariga","123.456.789-00");
-        cadastroController.addPet("tomaz","Cachorro");
-        cadastroController.addPet("Bola","Gato");
+        cadastroController.addCadastro("rapariga", "123.456.789-00");
+        cadastroController.addPet("tomaz", "Cachorro");
+        cadastroController.addPet("Bola", "Gato");
 
-        cadastroController.addCadastro("corno manso","321.654.987-00");
-        cadastroController.addPet("toto","Cachorro");
-        cadastroController.addPet("tatu","Gato");
+        cadastroController.addCadastro("corno manso", "321.654.987-00");
+        cadastroController.addPet("toto", "Cachorro");
+        cadastroController.addPet("tatu", "Gato");
     }
 
     public void mostrar() {
@@ -198,6 +199,7 @@ public class AgendarWindow extends javax.swing.JFrame {
     private javax.swing.JButton adicionarButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<Pet> jComboBox1;
+
     private javax.swing.JLabel cpfLabel;
     private javax.swing.JLabel petLabel;
     private javax.swing.JLabel donoLabel;

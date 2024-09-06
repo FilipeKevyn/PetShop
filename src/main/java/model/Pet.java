@@ -2,22 +2,18 @@ package model;
 
 public class Pet {
     private String nome;
-    private Especie especies;
+    private String especies;
     private Dono dono;
 
     public Pet(String nome, String especie){
         this.nome = nome;
-        if (especie.equals("Cachorro")){
-            this.especies = Especie.CACHORRO;
-        } else {
-            this.especies = Especie.GATO;
-        }
+        this.especies = especie;
     }
     public String getNome() {
         return nome;
     }
 
-    public Especie getEspecie(){
+    public String getEspecie(){
         return especies;
     }
     @Override

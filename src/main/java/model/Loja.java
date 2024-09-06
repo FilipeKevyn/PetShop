@@ -37,11 +37,14 @@ public class Loja implements Serializable {
         for (int i = 0; i < agendamentos.size(); i++) {
             Agendamento a = agendamentos.get(i);
             dados[i] = new Object[] {
+                    a.getDono().getNome(),
                     a.getPet().getNome(),
                     a.getPet().getEspecie(),
                     a.getDateTime().format(DateTimeFormatter.ofPattern("kk:mm")),
                     a.qtdprocedimento(),
-                    a.valorTotal()};
+                    a.valorTotal(),
+                    };
+
         }
 
         DefaultTableModel tableModel = new DefaultTableModel(dados,

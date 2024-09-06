@@ -8,41 +8,37 @@ import controller.CadastroController;
 import model.Dono;
 import model.Loja;
 import model.Procedimento;
+import window.TabelaWindow;
+import window.TelaInicial;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //AgendarWindow petWindow = new AgendarWindow();
-
-        //teste cadastro
-        CadastroController cadastroController = CadastroController.getInstance();
-        cadastroController.addCadastro("Filipe","1234");
-        cadastroController.addCadastro("Beto","1234");
-        //teste agendamento
-        Loja loja = Loja.getInstance();
+        // adicionar os procedimentos a loja
         AgendaController agendaController = AgendaController.getInstance();
+        agendaController.getLoja().addProcedimentos("Cortar as unhas",13,35);
+        agendaController.getLoja().addProcedimentos("Banho",65,65);
+        agendaController.getLoja().addProcedimentos("Tosa",70,35);
 
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 
-        loja.addProcedimentos("Cortar unha", 20, 20);
-        loja.addProcedimentos("Banho", 50, 60);
-        loja.addProcedimentos("Tosa", 90, 50);
-
-        List<Procedimento> procedimentos = new ArrayList<>();
-        procedimentos.add(loja.getProcedimentos().get(1));
-        procedimentos.add(loja.getProcedimentos().get(2));
-
-        List<Procedimento> procedimentos2 = new ArrayList<>();
-        procedimentos2.add(loja.getProcedimentos().get(1));
-        procedimentos2.add(loja.getProcedimentos().get(2));
-
-//        //ArrayList<Procedimento> procedimentos = loja;
-//        agendaController.addAgendamento("Filipe", "1234",
-//                "Dudu", "Cachorro", procedimentos);
-//        agendaController.addAgendamento("Beto", "321","Bixano","Gato",procedimentos2);
-
-        System.out.println(loja.getAgendamentos());
-        System.out.println(loja.getCadastrados());
+        java.awt.EventQueue.invokeLater(() -> new TelaInicial().setVisible(true));
     }
 }
