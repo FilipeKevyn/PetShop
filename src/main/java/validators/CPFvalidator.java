@@ -12,6 +12,7 @@ public class CPFvalidator implements Validator<String>{
     public boolean verificarSeExiste(String cpf){
         for (Dono dono : loja.getCadastrados()){
             if (dono.getCpf().equals(cpf)){
+                System.out.println(dono.getNome());
                 return true;
             }
         }
@@ -21,10 +22,10 @@ public class CPFvalidator implements Validator<String>{
     public boolean validar(String cpf) {
         String cpfPattern = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}";
 
+        // Use the Pattern and Matcher classes to perform the match
         Pattern pattern = Pattern.compile(cpfPattern);
         Matcher matcher = pattern.matcher(cpf);
 
-        // falta implementar validar se o cpf não é igual a outro da lista
-        return matcher.matches() && verificarSeExiste(cpf);
+        return matcher.matches();
     }
 }
