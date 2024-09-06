@@ -1,17 +1,14 @@
 package window;
 
-import model.Loja;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import graphics.RoundedButton;
+import javax.swing.*;
+import java.awt.*;
 
 public class TelaInicial extends JFrame {
 
-    private JButton jButton2;
-    private JButton jButton3;  // Botão "CADASTRAR USUARIO"
-    private JButton jButton4;  // Novo botão "ABRIR TABELA"
+    private RoundedButton jButton2;
+    private RoundedButton jButton3;  // Botão "CADASTRAR USUARIO"
+    private RoundedButton jButton4;  // Novo botão "ABRIR TABELA"
     private JPanel jPanel1;
 
     public TelaInicial() {
@@ -22,62 +19,64 @@ public class TelaInicial extends JFrame {
     private void initComponents() {
 
         jPanel1 = new JPanel();
-        jButton2 = new JButton();
-        jButton3 = new JButton();  // Inicializando o botão "CADASTRAR USUARIO"
-        jButton4 = new JButton();  // Inicializando o novo botão "ABRIR TABELA"
+        jButton2 = new RoundedButton("AGENDAR");
+        jButton3 = new RoundedButton("CADASTRAR USUARIO");
+        jButton4 = new RoundedButton("ABRIR TABELA");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Tela Inicial");
 
-        jButton2.setText("AGENDAR");
+        // Configura o tamanho dos botões
+        Dimension buttonSize = new Dimension(250, 35); // Ajusta o tamanho dos botões
+        jButton2.setPreferredSize(buttonSize);
+        jButton3.setPreferredSize(buttonSize);
+        jButton4.setPreferredSize(buttonSize);
+
+        // Adiciona ação aos botões
         jButton2.addActionListener(evt -> openAgendar());
-
-        jButton3.setText("CADASTRAR USUARIO");
         jButton3.addActionListener(evt -> openCadastrarUsuario1());
+        jButton4.addActionListener(evt -> openTabela());
 
-        // Configurando o novo botão "ABRIR TABELA"
-        jButton4.setText("ABRIR TABELA");
-        jButton4.addActionListener(evt -> {
-            openTabela();
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        // Configura o painel
+        jPanel1.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Adiciona margem ao painel
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE) // Novo botão "ABRIR TABELA"
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE) // Botão "CADASTRAR USUARIO"
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)) // Botão "AGENDAR"
-                                .addContainerGap(46, Short.MAX_VALUE))
+                                .addGap(20) // Espaçamento horizontal
+                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                                        .addComponent(jButton4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(20) // Espaçamento horizontal
+                        )
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE) // Botão "CADASTRAR USUARIO"
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE) // Botão "AGENDAR"
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE) // Novo botão "ABRIR TABELA"
-                                .addContainerGap(98, Short.MAX_VALUE))
+                jPanel1Layout.createSequentialGroup()
+                        .addGap(40) // Espaçamento vertical inicial
+                        .addComponent(jButton3)
+                        .addGap(20) // Espaçamento vertical entre botões
+                        .addComponent(jButton2)
+                        .addGap(20) // Espaçamento vertical entre botões
+                        .addComponent(jButton4)
+                        .addGap(40) // Espaçamento vertical inferior
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
         );
 
@@ -102,4 +101,5 @@ public class TelaInicial extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new TelaInicial().setVisible(true));
     }
+
 }
