@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaController{
-    private Loja loja = Loja.getInstance();
+    private CadastroController cadastroController = CadastroController.getInstance();
+    private Loja loja = cadastroController.getLoja();
     private static AgendaController instance;
     private AgendaController(){
     }
@@ -30,7 +31,6 @@ public class AgendaController{
             setTempo(agendamento);
         }
         loja.getAgendamentos().add(agendamento);
-
         return agendamento;
     }
 

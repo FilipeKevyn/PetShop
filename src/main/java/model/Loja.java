@@ -12,19 +12,11 @@ public class Loja implements Serializable {
     private List<Pet> pets;
     private List<Procedimento> procedimentos;
 
-    private static Loja instance;
-    private Loja() {
+    public Loja() {
         agendamentos = new ArrayList<>();
         cadastrados = new ArrayList<>();
         pets = new ArrayList<>();
         procedimentos = new ArrayList<>();
-    }
-
-    public static Loja getInstance() {
-        if (instance == null){
-            instance = new Loja();
-        }
-        return instance;
     }
 
     public List<Agendamento> getAgendamentos() {
@@ -75,5 +67,13 @@ public class Loja implements Serializable {
     public Dono buscarDono(String cpf) {
         Dono dono = (Dono) cadastrados.stream().filter(e -> e.getCpf().equals(cpf)).findFirst().orElse(null);
         return dono;
+    }
+    public boolean verificarPet(Pet pet){
+        for (Agendamento agendamento: agendamentos){
+            if (agendamento.getPet().equals(pet)){
+                return true;
+            }
+        }
+        return false;
     }
 }

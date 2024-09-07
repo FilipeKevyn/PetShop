@@ -9,7 +9,7 @@ import window.TableTestWindow;
 import java.util.List;
 
 public class CadastroController {
-    private Loja loja = Loja.getInstance();
+    private Loja loja = new Loja();
     private TableTestWindow tableTestWindow;
     private Dono dono = new Dono();
     private static CadastroController instance;
