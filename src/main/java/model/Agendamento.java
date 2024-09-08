@@ -3,9 +3,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Agendamento implements Serializable {
     private Pet pet;
@@ -42,18 +40,10 @@ public class Agendamento implements Serializable {
     }
 
     public double valorTotal(){
-        double valor = 0;
-        for (Procedimento procedimento : procedimentos) {
-            valor += procedimento.getPreco();
-        }
-        return valor;
+        return procedimentos.stream().mapToDouble(Procedimento::getPreco).sum();
     }
-    public int qtdprocedimento(){
-        int quantidade = 0;
-        for (Procedimento procedimento : procedimentos){
-            quantidade ++;
-        }
-        return quantidade;
+    public long qtdProcedimento(){
+        return procedimentos.stream().count();
     }
 
     @Override
@@ -63,7 +53,7 @@ public class Agendamento implements Serializable {
             pet.getNome(),
             pet.getEspecie(),
             getDateTime().format(dtf),
-            qtdprocedimento(),
+            qtdProcedimento(),
             valorTotal());
     }
 }

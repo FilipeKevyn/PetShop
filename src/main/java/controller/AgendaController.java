@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaController{
-    private CadastroController cadastroController = CadastroController.getInstance();
-    private Loja loja = cadastroController.getLoja();
+    private Loja loja = CadastroController.getInstance().getLoja();
     private static AgendaController instance;
-    private AgendaController(){
-    }
+    private AgendaController(){}
 
     public static AgendaController getInstance() {
         if (instance == null){

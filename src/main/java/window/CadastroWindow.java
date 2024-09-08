@@ -2,6 +2,7 @@ package window;
 
 import controller.CadastroController;
 import validators.CPFvalidator;
+import validators.NomeValidator;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -17,9 +18,8 @@ public class CadastroWindow extends JFrame {
     private JComboBox<String> especiePetComboBox;
     private JButton adicionarButton;
     private JButton concluirButton;
-    private JButton jButton1;
-    private TableTestWindow tableTestWindow;
     private CPFvalidator cpfValidator = new CPFvalidator();
+    private NomeValidator nomeValidator = new NomeValidator();
     private CadastroController cadastroController = CadastroController.getInstance();
 
     public CadastroWindow() {
@@ -103,9 +103,15 @@ public class CadastroWindow extends JFrame {
             cpf = cpfField.getText();
             if (!cpfValidator.validar(cpf)) {
                 JOptionPane.showMessageDialog(null, "CPF inserido incorretamente", "CPF error", JOptionPane.ERROR_MESSAGE);
-            } else if (cpfValidator.verificarSeExiste(cpf)) {
+            }
+            else if (cpfValidator.verificarSeExiste(cpf)) {
                 JOptionPane.showMessageDialog(null, "CPF já cadastrado", "CPF error", JOptionPane.ERROR_MESSAGE);
-            } else {
+            }
+            else if (!nomeValidator.validar(nome_pet)) {
+                // caso o nome for vazio ou inválido
+                JOptionPane.showMessageDialog(null, "Adicione pelo menos um Pet", "Cadastro error", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
                 cadastroController.addPet(nome_pet, especie);
                 System.out.println(cadastroController.getDono().getPets());
                 nomePetField.setText("");
@@ -120,14 +126,18 @@ public class CadastroWindow extends JFrame {
             cpf = cpfField.getText();
 
             if (!cpfValidator.validar(cpf)) {
-                JOptionPane.showMessageDialog(null, "CPF inserido incorretamente", "CPF error", JOptionPane.ERROR_MESSAGE);
-            } else if (cpfValidator.verificarSeExiste(cpf)) {
-                JOptionPane.showMessageDialog(null, "CPF já cadastrado", "CPF error", JOptionPane.ERROR_MESSAGE);
-            } else if (cadastroController.getDono().getPets().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Adicione pelo menos um Pet", "PET error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "CPF inserido incorretamente", "Cadastro error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (cpfValidator.verificarSeExiste(cpf)) {
+                JOptionPane.showMessageDialog(null, "CPF já cadastrado", "Cadastro error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (cadastroController.getDono().getPets().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Adicione pelo menos um Pet", "Cadastro error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (!nomeValidator.validar(nomeDono)) {
+                JOptionPane.showMessageDialog(null, "Nome não inserido", "Cadastro error", JOptionPane.ERROR_MESSAGE);
             } else {
                 cadastroController.addCadastro(nomeDono, cpf);
-                System.out.println(cadastroController.getLoja().getCadastrados());
                 nomeDonoField.setText("");
                 cpfField.setText("");
                 nomePetField.setText("");
@@ -136,21 +146,12 @@ public class CadastroWindow extends JFrame {
         });
         buttonPanel.add(concluirButton);
 
-        // Botão Tabela
-        jButton1 = new JButton("Tabela");
-        jButton1.addActionListener(evt -> openTable());
-        buttonPanel.add(jButton1);
-
         // Adicionando o painel de botões à janela
-        gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridx = 1;
+        gbc.gridy = 5;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         CadUs.add(buttonPanel, gbc);
-    }
-
-    public void openTable() {
-        tableTestWindow.setVisible(true);
     }
 
     public void mostrar() {

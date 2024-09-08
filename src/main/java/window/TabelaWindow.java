@@ -13,42 +13,37 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TabelaWindow extends javax.swing.JFrame {
+    private JButton jButton2;
+    private JLabel jLabel1;
+    private JPanel jPanel1;
+    private JScrollPane jScrollPane1;
+    private JTable jTable1 = new JTable();
+    private Loja loja = AgendaController.getInstance().getLoja();
 
-    private boolean isEditable = false;
-    private DefaultTableModel tableModel;
-    private AgendaController agendaController = AgendaController.getInstance();
     public TabelaWindow() {
         initComponents();
-//        agendaController = new AgendaController();
     }
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jPanel1 = new JPanel();
+        setTitle("Tabela de Agendamentos");
+        jScrollPane1 = new JScrollPane();
+        jLabel1 = new JLabel();
+        jButton2 = new JButton();
 
         LocalDateTime currentDate = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("kk:mm");
         String formattedDate = currentDate.format(formatter);
-        String formattedTime = currentDate.format(timeFormatter);
 
-        jTable1.setModel(agendaController.getLoja().getAgendamentoModel());
+        try {
+            jTable1.setModel(loja.getAgendamentoModel());
+        } catch (NullPointerException e){}
 
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setText("Agenda  " + formattedDate);
-
-        jButton1.setText("Editar");
-        jButton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                toggleEditMode();
-            }
-        });
 
         jButton2.setText("Concluido");
         jButton2.addActionListener(new ActionListener() {
@@ -69,7 +64,6 @@ public class TabelaWindow extends javax.swing.JFrame {
                                                 .addComponent(jLabel1)
                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jButton1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jButton2)
                                                 .addGap(23, 23, 23))))
@@ -83,7 +77,6 @@ public class TabelaWindow extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton1)
                                         .addComponent(jButton2))
                                 .addContainerGap())
         );
@@ -104,14 +97,6 @@ public class TabelaWindow extends javax.swing.JFrame {
         pack();
     }
 
-    private void toggleEditMode() {
-        isEditable = !isEditable;
-        // Update table model to reflect editability
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        jTable1.setModel(model); // This triggers the model to update editability
-        jButton1.setText(isEditable ? "Salvar" : "Editar"); // Toggle button text
-    }
-
     private void removeSelectedRows() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int[] selectedRows = jTable1.getSelectedRows(); // Obtém as linhas selecionadas
@@ -121,15 +106,6 @@ public class TabelaWindow extends javax.swing.JFrame {
             model.removeRow(selectedRows[i]);
         }
     }
-
-    public void atualizar() {
-        // Implementar atualização se necessário
-    }
-
-    public void mostrar() {
-        setVisible(true); // Mostrar a janela atual
-    }
-
     public static void main(String args[]) {
 
         try {
@@ -151,13 +127,4 @@ public class TabelaWindow extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(() -> new TabelaWindow().setVisible(true));
     }
-
-    // Variables declaration - do not modify
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1 = new JTable();
-    // End of variables declaration
 }

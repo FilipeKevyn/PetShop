@@ -11,6 +11,7 @@ import model.Procedimento;
 import window.TabelaWindow;
 import window.TelaInicial;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +19,9 @@ public class Main {
     public static void main(String[] args) {
         // adicionar os procedimentos a loja
         AgendaController agendaController = AgendaController.getInstance();
-        agendaController.getLoja().addProcedimentos("Cortar as unhas",13,35);
-        agendaController.getLoja().addProcedimentos("Banho",65,65);
-        agendaController.getLoja().addProcedimentos("Tosa",70,35);
+        agendaController.getLoja().addProcedimentos("Cortar as unhas",15,25);
+        agendaController.getLoja().addProcedimentos("Banho",65,50);
+        agendaController.getLoja().addProcedimentos("Tosa",70,60);
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -29,13 +30,8 @@ public class Main {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 

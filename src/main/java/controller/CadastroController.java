@@ -3,14 +3,11 @@ package controller;
 import model.Dono;
 import model.Loja;
 import model.Pet;
-import window.CadastroWindow;
-import window.TableTestWindow;
 
 import java.util.List;
 
 public class CadastroController {
     private Loja loja = new Loja();
-    private TableTestWindow tableTestWindow;
     private Dono dono = new Dono();
     private static CadastroController instance;
     private CadastroController() {

@@ -33,7 +33,7 @@ public class Loja implements Serializable {
                     a.getPet().getNome(),
                     a.getPet().getEspecie(),
                     a.getDateTime().format(DateTimeFormatter.ofPattern("kk:mm")),
-                    a.qtdprocedimento(),
+                    a.qtdProcedimento(),
                     a.valorTotal(),
                     };
 
@@ -69,11 +69,6 @@ public class Loja implements Serializable {
         return dono;
     }
     public boolean verificarPet(Pet pet){
-        for (Agendamento agendamento: agendamentos){
-            if (agendamento.getPet().equals(pet)){
-                return true;
-            }
-        }
-        return false;
+        return agendamentos.stream().anyMatch(e -> e.getPet().equals(pet));
     }
 }

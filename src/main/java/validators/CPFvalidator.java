@@ -1,5 +1,6 @@
 package validators;
 
+import controller.AgendaController;
 import model.Dono;
 import model.Loja;
 
@@ -7,12 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CPFvalidator implements Validator<String>{
-    private Loja loja = Loja.getInstance();
+    private Loja loja = AgendaController.getInstance().getLoja();
 
     public boolean verificarSeExiste(String cpf){
         for (Dono dono : loja.getCadastrados()){
             if (dono.getCpf().equals(cpf)){
-                System.out.println(dono.getNome());
                 return true;
             }
         }
