@@ -111,6 +111,7 @@ public class AgendarWindow extends JFrame {
                 JOptionPane.showMessageDialog(null, "Adicione pelo menos 1 procedimento", "Agendamento error", JOptionPane.ERROR_MESSAGE);
             }
             else {
+                JOptionPane.showMessageDialog(null, "Pet Agendado.", "AGENDADO COM SUCESSO", JOptionPane.DEFAULT_OPTION);
                 agendaController.addAgendamento(nomeDono, cpf, pet, jListProced.getSelectedValuesList());
             }
         });
