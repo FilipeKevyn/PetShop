@@ -9,13 +9,11 @@ import java.util.List;
 public class Loja implements Serializable {
     private List<Agendamento> agendamentos;
     private List<Dono> cadastrados;
-    private List<Pet> pets;
     private List<Procedimento> procedimentos;
 
     public Loja() {
         agendamentos = new ArrayList<>();
         cadastrados = new ArrayList<>();
-        pets = new ArrayList<>();
         procedimentos = new ArrayList<>();
     }
 
@@ -51,10 +49,6 @@ public class Loja implements Serializable {
         return cadastrados;
     }
 
-    public List<Pet> getPets() {
-        return pets;
-    }
-
     public List<Procedimento> getProcedimentos() {
         return procedimentos;
     }
@@ -65,7 +59,7 @@ public class Loja implements Serializable {
     }
 
     public Dono buscarDono(String cpf) {
-        Dono dono = (Dono) cadastrados.stream().filter(e -> e.getCpf().equals(cpf)).findFirst().orElse(null);
+        Dono dono = cadastrados.stream().filter(e -> e.getCpf().equals(cpf)).findFirst().orElse(null);
         return dono;
     }
     public boolean verificarPet(Pet pet){

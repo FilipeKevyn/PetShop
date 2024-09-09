@@ -5,6 +5,7 @@ import controller.CadastroController;
 import model.Loja;
 import model.Pet;
 import model.Procedimento;
+import principal.SerializationUtil;
 import validators.CPFvalidator;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class AgendarWindow extends JFrame {
     private CPFvalidator cpfValidator;
     private List<Pet> lista_pet;
     private Pet[] pets;
+    private String filename = "loja.ser";
 
     public AgendarWindow() {
         initComponents();
@@ -112,6 +114,8 @@ public class AgendarWindow extends JFrame {
             }
             else {
                 agendaController.addAgendamento(nomeDono, cpf, pet, jListProced.getSelectedValuesList());
+                JOptionPane.showMessageDialog(null, "Pet Agendado", "AGENDADO COM SUCESSO", JOptionPane.DEFAULT_OPTION);
+                SerializationUtil.serializarLoja(loja,filename);
             }
         });
 

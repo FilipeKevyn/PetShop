@@ -1,6 +1,7 @@
 package window;
 
 import controller.AgendaController;
+import controller.CadastroController;
 import model.Loja;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class TabelaWindow extends javax.swing.JFrame {
     private JPanel jPanel1;
     private JScrollPane jScrollPane1;
     private JTable jTable1 = new JTable();
-    private Loja loja = AgendaController.getInstance().getLoja();
+    private Loja loja = CadastroController.getInstance().getLoja();
 
     public TabelaWindow() {
         initComponents();

@@ -17,11 +17,26 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // adicionar os procedimentos a loja
+        // Nome do arquivo para serialização
+        String filename = "loja.ser";
+
+        // Tentando desserializar a loja se o arquivo existir
+        Loja loja = SerializationUtil.desserializarLoja(filename);
+
         AgendaController agendaController = AgendaController.getInstance();
-        agendaController.getLoja().addProcedimentos("Cortar as unhas",15,25);
-        agendaController.getLoja().addProcedimentos("Banho",65,50);
-        agendaController.getLoja().addProcedimentos("Tosa",70,60);
+
+        // Se a loja for null, isso significa que o arquivo não existe ou falhou na desserialização
+        if (loja == null) {
+            // Criar uma nova loja e adicionar procedimentos
+            loja = CadastroController.getInstance().getLoja();
+            loja.addProcedimentos("Cortar as unhas", 13, 35);
+            loja.addProcedimentos("Banho", 65, 65);
+            loja.addProcedimentos("Tosa", 70, 35);
+        }
+        else {
+            agendaController.setLoja(loja);
+            System.out.println(loja.getCadastrados());
+        }
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -30,9 +45,8 @@ public class Main {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TabelaWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         java.awt.EventQueue.invokeLater(() -> new TelaInicial().setVisible(true));
