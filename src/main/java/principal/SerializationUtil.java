@@ -9,7 +9,6 @@ public class SerializationUtil {
     public static void serializarLoja(Loja loja, String filename) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(loja);
-            System.out.println("Loja serializada com sucesso.");
         } catch (IOException e) {
             e.printStackTrace();
         }

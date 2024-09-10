@@ -30,13 +30,12 @@ public class Main {
             // Criar uma nova loja e adicionar procedimentos
             loja = CadastroController.getInstance().getLoja();
             loja.addProcedimentos("Cortar as unhas", 13, 35);
-            loja.addProcedimentos("Banho", 65, 65);
-            loja.addProcedimentos("Tosa", 70, 35);
+            loja.addProcedimentos("Banho", 65, 60);
+            loja.addProcedimentos("Tosa", 60, 45);
             SerializationUtil.serializarLoja(loja,filename);
         }
         else {
             agendaController.setLoja(loja);
-            System.out.println(loja.getCadastrados());
         }
 
         try {

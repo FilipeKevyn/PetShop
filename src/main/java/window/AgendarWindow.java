@@ -64,13 +64,11 @@ public class AgendarWindow extends JFrame {
 
         okButton.addActionListener(e -> {
             String cpf = cpfTextfield.getText(); // Capturar CPF aqui
-            System.out.println("CPF informado: " + cpf);
 
             if (!cpfValidator.validar(cpf)) {
                 JOptionPane.showMessageDialog(null, "Dono não encontrado", "CPF error", JOptionPane.ERROR_MESSAGE);
             } else {
                 nomeDono = loja.buscarDono(cpf).getNome();
-                System.out.println("Nome do Dono encontrado: " + nomeDono);
                 lista_pet = agendaController.atualizarCombo(cpf);
 
                 if (nomeDono != null) {
