@@ -71,6 +71,7 @@ public class AgendaController{
     }
 
     public void setLoja(Loja loja) {
+        this.loja = loja;
         CadastroController.getInstance().setLoja(loja);
     }
 }

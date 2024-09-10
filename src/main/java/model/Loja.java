@@ -23,7 +23,6 @@ public class Loja implements Serializable {
 
     public DefaultTableModel getAgendamentoModel() {
         Object[][] dados = new Object[agendamentos.size()][6];
-
         for (int i = 0; i < agendamentos.size(); i++) {
             Agendamento a = agendamentos.get(i);
             dados[i] = new Object[] {
@@ -38,7 +37,7 @@ public class Loja implements Serializable {
         }
 
         DefaultTableModel tableModel = new DefaultTableModel(dados,
-            new String[]{
+             new String[]{
                     "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
             });
 

@@ -11,7 +11,6 @@ public class TelaInicial extends JFrame {
     private RoundedButton jButton3;  // Botão "CADASTRAR USUARIO"
     private RoundedButton jButton4;  // Novo botão "ABRIR TABELA"
     private JPanel jPanel1;
-    private AgendaController agendaController = AgendaController.getInstance();
 
     public TelaInicial() {
         initComponents();

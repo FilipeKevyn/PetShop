@@ -19,7 +19,7 @@ public class AgendarWindow extends JFrame {
     private Pet pet;
     private String cpf;
     private AgendaController agendaController = AgendaController.getInstance();
-    private Loja loja = agendaController.getLoja();
+    private Loja loja = CadastroController.getInstance().getLoja();
     private CPFvalidator cpfValidator;
     private List<Pet> lista_pet;
     private Pet[] pets;

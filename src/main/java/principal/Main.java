@@ -32,6 +32,7 @@ public class Main {
             loja.addProcedimentos("Cortar as unhas", 13, 35);
             loja.addProcedimentos("Banho", 65, 65);
             loja.addProcedimentos("Tosa", 70, 35);
+            SerializationUtil.serializarLoja(loja,filename);
         }
         else {
             agendaController.setLoja(loja);
