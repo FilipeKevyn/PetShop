@@ -9,13 +9,11 @@ import java.util.List;
 public class Loja implements Serializable {
     private List<Agendamento> agendamentos;
     private List<Dono> cadastrados;
-    private List<Pet> pets;
     private List<Procedimento> procedimentos;
 
     public Loja() {
         agendamentos = new ArrayList<>();
         cadastrados = new ArrayList<>();
-        pets = new ArrayList<>();
         procedimentos = new ArrayList<>();
     }
 
@@ -25,7 +23,6 @@ public class Loja implements Serializable {
 
     public DefaultTableModel getAgendamentoModel() {
         Object[][] dados = new Object[agendamentos.size()][6];
-
         for (int i = 0; i < agendamentos.size(); i++) {
             Agendamento a = agendamentos.get(i);
             dados[i] = new Object[] {
@@ -40,7 +37,7 @@ public class Loja implements Serializable {
         }
 
         DefaultTableModel tableModel = new DefaultTableModel(dados,
-            new String[]{
+             new String[]{
                     "Dono", "Nome do Pet", "Especie", "Horario", "Procedimento", "Valor",
             });
 
@@ -49,10 +46,6 @@ public class Loja implements Serializable {
 
     public List<Dono> getCadastrados() {
         return cadastrados;
-    }
-
-    public List<Pet> getPets() {
-        return pets;
     }
 
     public List<Procedimento> getProcedimentos() {
@@ -65,7 +58,7 @@ public class Loja implements Serializable {
     }
 
     public Dono buscarDono(String cpf) {
-        Dono dono = (Dono) cadastrados.stream().filter(e -> e.getCpf().equals(cpf)).findFirst().orElse(null);
+        Dono dono = cadastrados.stream().filter(e -> e.getCpf().equals(cpf)).findFirst().orElse(null);
         return dono;
     }
     public boolean verificarPet(Pet pet){

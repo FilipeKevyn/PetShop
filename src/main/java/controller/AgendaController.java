@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaController{
-    private Loja loja = CadastroController.getInstance().getLoja();
+    private Loja loja;
     private static AgendaController instance;
-    private AgendaController(){}
+    private AgendaController(){
+        loja = CadastroController.getInstance().getLoja();
+    }
 
     public static AgendaController getInstance() {
         if (instance == null){
@@ -66,5 +68,10 @@ public class AgendaController{
 
     public Loja getLoja() {
         return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+        CadastroController.getInstance().setLoja(loja);
     }
 }

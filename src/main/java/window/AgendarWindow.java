@@ -5,6 +5,7 @@ import controller.CadastroController;
 import model.Loja;
 import model.Pet;
 import model.Procedimento;
+import principal.SerializationUtil;
 import validators.CPFvalidator;
 
 import javax.swing.*;
@@ -18,10 +19,11 @@ public class AgendarWindow extends JFrame {
     private Pet pet;
     private String cpf;
     private AgendaController agendaController = AgendaController.getInstance();
-    private Loja loja = agendaController.getLoja();
+    private Loja loja = CadastroController.getInstance().getLoja();
     private CPFvalidator cpfValidator;
     private List<Pet> lista_pet;
     private Pet[] pets;
+    private String filename = "loja.ser";
 
     public AgendarWindow() {
         initComponents();
@@ -62,13 +64,11 @@ public class AgendarWindow extends JFrame {
 
         okButton.addActionListener(e -> {
             String cpf = cpfTextfield.getText(); // Capturar CPF aqui
-            System.out.println("CPF informado: " + cpf);
 
             if (!cpfValidator.validar(cpf)) {
                 JOptionPane.showMessageDialog(null, "Dono não encontrado", "CPF error", JOptionPane.ERROR_MESSAGE);
             } else {
                 nomeDono = loja.buscarDono(cpf).getNome();
-                System.out.println("Nome do Dono encontrado: " + nomeDono);
                 lista_pet = agendaController.atualizarCombo(cpf);
 
                 if (nomeDono != null) {
@@ -112,6 +112,8 @@ public class AgendarWindow extends JFrame {
             }
             else {
                 agendaController.addAgendamento(nomeDono, cpf, pet, jListProced.getSelectedValuesList());
+                JOptionPane.showMessageDialog(null, "Pet Agendado", "AGENDADO COM SUCESSO", JOptionPane.DEFAULT_OPTION);
+                SerializationUtil.serializarLoja(loja,filename);
             }
         });
 

@@ -1,6 +1,7 @@
 package window;
 
 import controller.AgendaController;
+import controller.CadastroController;
 import model.Loja;
 
 import javax.swing.*;
@@ -8,17 +9,18 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
-import java.time.LocalDate;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TabelaWindow extends javax.swing.JFrame {
     private JButton jButton2;
+    private JButton finalizarDiaButton;
     private JLabel jLabel1;
     private JPanel jPanel1;
     private JScrollPane jScrollPane1;
     private JTable jTable1 = new JTable();
-    private Loja loja = AgendaController.getInstance().getLoja();
+    private Loja loja = CadastroController.getInstance().getLoja();
 
     public TabelaWindow() {
         initComponents();
@@ -27,11 +29,13 @@ public class TabelaWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
+
         jPanel1 = new JPanel();
         setTitle("Tabela de Agendamentos");
         jScrollPane1 = new JScrollPane();
         jLabel1 = new JLabel();
         jButton2 = new JButton();
+        finalizarDiaButton = new JButton();  // Inicializando o novo botão
 
         LocalDateTime currentDate = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -39,7 +43,8 @@ public class TabelaWindow extends javax.swing.JFrame {
 
         try {
             jTable1.setModel(loja.getAgendamentoModel());
-        } catch (NullPointerException e){}
+
+        } catch (NullPointerException e) {}
 
         jScrollPane1.setViewportView(jTable1);
 
@@ -49,6 +54,13 @@ public class TabelaWindow extends javax.swing.JFrame {
         jButton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 removeSelectedRows();
+            }
+        });
+
+        finalizarDiaButton.setText("Finalizar Dia");
+        finalizarDiaButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                finalizarDia();
             }
         });
 
@@ -64,6 +76,7 @@ public class TabelaWindow extends javax.swing.JFrame {
                                                 .addComponent(jLabel1)
                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(finalizarDiaButton)  // Coloca o botão na esquerda
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jButton2)
                                                 .addGap(23, 23, 23))))
@@ -77,7 +90,8 @@ public class TabelaWindow extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton2))
+                                        .addComponent(jButton2)
+                                        .addComponent(finalizarDiaButton))  // Coloca o botão na mesma linha
                                 .addContainerGap())
         );
 
@@ -99,13 +113,32 @@ public class TabelaWindow extends javax.swing.JFrame {
 
     private void removeSelectedRows() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int[] selectedRows = jTable1.getSelectedRows(); // Obtém as linhas selecionadas
+        int[] selectedRows = jTable1.getSelectedRows();
 
         // Remove as linhas de baixo para cima
         for (int i = selectedRows.length - 1; i >= 0; i--) {
             model.removeRow(selectedRows[i]);
         }
     }
+
+    private void finalizarDia() {
+        // Deletar o arquivo serializado
+        File file = new File("loja.ser");
+        if (file.exists()) {
+            loja.getAgendamentos().clear();
+            ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
+
+            if (file.delete()) {
+                JOptionPane.showMessageDialog(this, "Dados do dia finalizados");
+            } else {
+                JOptionPane.showMessageDialog(this, "Falha ao finalizar o dia");
+            }
+        } else {
+            System.out.println("Arquivo 'loja.ser' não encontrado");
+
+        }
+    }
+
     public static void main(String args[]) {
 
         try {

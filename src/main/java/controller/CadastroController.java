@@ -7,10 +7,11 @@ import model.Pet;
 import java.util.List;
 
 public class CadastroController {
-    private Loja loja = new Loja();
+    private Loja loja;
     private Dono dono = new Dono();
     private static CadastroController instance;
     private CadastroController() {
+        loja = new Loja();
     }
     public static CadastroController getInstance() {
         if (instance == null){
@@ -41,5 +42,9 @@ public class CadastroController {
 
     public Loja getLoja() {
         return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
     }
 }
