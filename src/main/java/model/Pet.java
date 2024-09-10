@@ -1,6 +1,9 @@
 package model;
 
-public class Pet {
+import java.awt.*;
+import java.io.Serializable;
+
+public class Pet implements Serializable {
     private String nome;
     private String especies;
     private Dono dono;

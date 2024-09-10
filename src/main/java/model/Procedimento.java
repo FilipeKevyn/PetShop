@@ -1,9 +1,10 @@
 package model;
 
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Procedimento {
+public class Procedimento implements Serializable {
     private String nome;
     private long tempo;
     private double preco;

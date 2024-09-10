@@ -1,11 +1,12 @@
 package model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Dono {
+public class Dono implements Serializable {
     private String nome;
 
     private String cpf;
@@ -41,7 +42,7 @@ public class Dono {
 
     @Override
     public String toString() {
-        return nome;
+        return cpf;
     }
 
 }

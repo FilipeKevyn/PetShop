@@ -1,6 +1,8 @@
 package window;
 
 import controller.CadastroController;
+import model.Loja;
+import principal.SerializationUtil;
 import validators.CPFvalidator;
 import validators.NomeValidator;
 
@@ -21,6 +23,8 @@ public class CadastroWindow extends JFrame {
     private CPFvalidator cpfValidator = new CPFvalidator();
     private NomeValidator nomeValidator = new NomeValidator();
     private CadastroController cadastroController = CadastroController.getInstance();
+    private Loja loja = CadastroController.getInstance().getLoja();
+    private String filename = "loja.ser";
 
     public CadastroWindow() {
         CadUs = new JFrame("Cadastro Dono");
@@ -113,8 +117,9 @@ public class CadastroWindow extends JFrame {
             }
             else {
                 cadastroController.addPet(nome_pet, especie);
-                System.out.println(cadastroController.getDono().getPets());
                 nomePetField.setText("");
+                JOptionPane.showMessageDialog(null, "Pet Adicionado", "ADICIONADO", JOptionPane.DEFAULT_OPTION);
+                SerializationUtil.serializarLoja(loja,filename);
             }
         });
         buttonPanel.add(adicionarButton);
@@ -142,6 +147,7 @@ public class CadastroWindow extends JFrame {
                 cpfField.setText("");
                 nomePetField.setText("");
                 JOptionPane.showMessageDialog(null, "Cadastrado com sucesso", "CONCLUIDO", JOptionPane.DEFAULT_OPTION);
+                SerializationUtil.serializarLoja(loja,filename);
             }
         });
         buttonPanel.add(concluirButton);
