@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PetShop-POO.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PetShop_POO_main_jar</output-path>
+    <root id="archive" name="PetShop-POO.main.jar">
+      <element id="module-output" name="PetShop-POO.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.formdev/flatlaf/3.5.1/8e4295f9ba5756736fa60a3a567fd9cd8840594f/flatlaf-3.5.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
