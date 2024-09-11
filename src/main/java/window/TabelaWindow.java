@@ -122,21 +122,9 @@ public class TabelaWindow extends javax.swing.JFrame {
     }
 
     private void finalizarDia() {
-        // Deletar o arquivo serializado
-        File file = new File("loja.ser");
-        if (file.exists()) {
-            loja.getAgendamentos().clear();
-            ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
-
-            if (file.delete()) {
-                JOptionPane.showMessageDialog(this, "Dados do dia finalizados");
-            } else {
-                JOptionPane.showMessageDialog(this, "Falha ao finalizar o dia");
-            }
-        } else {
-            System.out.println("Arquivo 'loja.ser' não encontrado");
-
-        }
+        loja.getAgendamentos().clear();
+        // limpa a tabela
+        ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
     }
 
     public static void main(String args[]) {

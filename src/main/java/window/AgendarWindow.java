@@ -113,7 +113,6 @@ public class AgendarWindow extends JFrame {
             else {
                 JOptionPane.showMessageDialog(null, "Pet Agendado.", "AGENDADO COM SUCESSO", JOptionPane.DEFAULT_OPTION);
                 agendaController.addAgendamento(nomeDono, cpf, pet, jListProced.getSelectedValuesList());
-                JOptionPane.showMessageDialog(null, "Pet Agendado", "AGENDADO COM SUCESSO", JOptionPane.DEFAULT_OPTION);
                 SerializationUtil.serializarLoja(loja,filename);
             }
         });
