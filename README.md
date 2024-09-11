@@ -21,18 +21,14 @@ Este projeto consiste em um sistema de pet shop desenvolvido para otimizar o ger
 
 ## Estrutura do Projeto
 
-![estrutura do projeto.jpg](D:\Users\Lipinho\Desktop\ProjetoPOO\estrutura_do_projeto.jpg)
+![estrutura do projeto.jpg](https://i.imgur.com/C7D3bQt.png)
 
 ## Interface do Projeto
 
-### Imagem 1
-![Imagem 1](https://imgur.com/ekYLbcn)
+![Imagem 1](https://i.imgur.com/ekYLbcn.png)
 
-### Imagem 2
-![Imagem 2](https://imgur.com/IFtAMkA)
+![Imagem 3](https://i.imgur.com/Aap1SXK.png)
 
-### Imagem 3
-![Imagem 3](https://imgur.com/Aap1SXK)
+![Imagem 4](https://i.imgur.com/mjb3poj.png)
 
-### Imagem 4
-![Imagem 4](https://imgur.com/mjb3poj)
+![Imagem 2](https://i.imgur.com/IFtAMkA.png)
