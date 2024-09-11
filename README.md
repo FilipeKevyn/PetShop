@@ -16,7 +16,7 @@ Este projeto consiste em um sistema de pet shop desenvolvido para otimizar o ger
 ## Tecnologias Utilizadas
 
 
-- **Java**: Linguagem de programação orientada a objetos usada para criar aplicações de diversos tipos.
+- **Java**: Linguagem de programação orientada a objetos usada para criar aplicações de diversos tipos. (JDK 17)
 - **Swing**: Biblioteca gráfica do Java para criar interfaces de usuário com componentes como botões, janelas, e tabelas.
 
 ## Estrutura do Projeto
