@@ -25,10 +25,10 @@ Este projeto consiste em um sistema de pet shop desenvolvido para otimizar o ger
 
 ## Interface do Projeto
 
-![image.png](D:\Users\Lipinho\Desktop\ProjetoPOO\telainicial.png)
+![image.png](https://imgur.com/ekYLbcn)
 
-![image.png](D:\Users\Lipinho\Desktop\ProjetoPOO\cadastrodono.png)
+![image.png](https://imgur.com/Aap1SXK)
 
-![image.png](D:\Users\Lipinho\Desktop\ProjetoPOO\agendarpet.png)
+![image.png](https://imgur.com/mjb3poj)
 
-![image.png](D:\Users\Lipinho\Desktop\ProjetoPOO\tabelaA.jpg)
+![image.png](https://imgur.com/g1Cdsa8)
